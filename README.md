@@ -132,6 +132,8 @@
     **Kubeconfig를 얻기 위한 과정**
     ![](images/oci-oke-access-kubeconfig-2.png)
 
+    > **위 내용은 oci-cli 설치 후 실행할 내용이므로 꼭 메모합니다.**
+
 * Kubeconfig를 얻기 위해서는 먼저 **oci-cli**를 설치합니다. Windows의 **Windows PowerShell**을 열고 (Windows 좌측 아래 검색 버튼 클릭 후 PowerShell 입력) 다음과 같이 입력해서 oci-cli를 설치합니다.
 
     > oci-cli 설치를 위해 Python이 우선 설치됩니다.
@@ -176,8 +178,39 @@
         # cp * c:\oracle
         ```
     
+* oci-cli 설정을 진행합니다. **Windows Powershell**에서 다음과 같이 입력합니다.
+    ```
+    # oci setup config
+    ```
 
+    * Enter a location for your config
+        * **c:\oracle\config**
+    * Enter a user OCID
+        * **앞에서 획득한 자신의 User OCID**
+    * Enter a tenancy OCID
+        * **앞에서 획득한 Tenancy OCID**
+    * Enter a region
+        * **ap-seoul-1**
+    * Do you want to generate a new RSA key pair?
+        * **n**
+    * Enter the location of your private key file:
+        * **c:\oracle\oci_api_key.pem**
+
+    > 마지막에 에러 메시지가 나올 수 있는데 무시합니다.
+
+* kubeconfig를 생성합니다. 먼저 **Windows PowerShell**을 통해서 다음과 같이 실행해서 oracle 폴더 하위에 kube 폴더를 생성합니다.
+    ```
+    # cd c:\oracle
+
+    # mkdir kube
+    ```
  
+ * 앞에서 메모한 kubeconfig 생성 명령어를 실행합니다. 단, Windows 환경에 맞게 생성할 경로를 수정해서 실행합니다. 아래는 예제입니다.
+
+    다음과 같은 실행 명령어에서 $HOME/.kube/config 부분을 c:\oracle\kube\config 로 수정합니다.
+    ```
+    # oci ce cluster create-kubeconfig --cluster-id ocid1.cluster.oc1.ap-seoul-1.aaaaaaaaae2dey3fha3diylfgrtgknrugbtdgnjwha2tizddhctdeobrhe4d --file :\oracle\kube\config --region ap-seoul-1
+    ```
 
 
 
