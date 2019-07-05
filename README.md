@@ -11,6 +11,7 @@
 * Kubernetes Container 배포
 
 ## Required Artifacts
+* 인터넷 접속 가능한 랩탑 (Windows 10이상, Windows 10 이하 버전일 경우 Powershell 필요)
 * GitHub 계정
 * OCI (Oracle Cloud Infrastructure) 계정
 * Git 설치
@@ -62,20 +63,23 @@
     * https://boogong.tistory.com/58
 
 ### Git Repository Clone
-* Git 설치가 완료되면 실습을 위해 제공된 GitHub Repository를 로컬에 다운로드 받는 Clone 작업을 합니다. 먼저, Windows Command Prompt**를 오픈 합니다.
+* Git 설치가 완료되면 실습을 위해 제공된 GitHub Repository를 로컬에 다운로드 받는 Clone 작업을 합니다. 먼저, Windows 좌측 하단의 검색 버튼을 클릭하고 **PowerShell**을 입력한 후 **Windows PowerShell**을 실행합니다.
 
-    ![](images/open-command-prompt-in-start-menu.png)
-    [Image Source: https://www.isunshare.com/windows-10/4-ways-to-open-command-prompt-in-windows-10.html]
+    <img src="images/windows-search-powershell.png" width="50%">
+
+    ![](images/windows-powershell.png)
+
+    [Image Source: https://itexplorer.tistory.com/40]
 
 * Command Prompt에서 다음과 같이 입력해서 C 드라이브에 실습을 위한 Git Repository를 가져옵니다.
-```
-# cd c:\
-# git clone https://github.com/MangDan/cloud-native-devops-workshop-wercker-oke.git
-```
+    ```
+    # cd c:\
+    # git clone https://github.com/MangDan/cloud-native-devops-workshop-wercker-oke.git
+    ```
 
 ### **STEP 2**: OCI에서 Kubernetes Cluster 생성하기
 * 먼저 OCI에 로그인합니다. 아래 URL을 통해서 Seoul Region으로 접속합니다.
-    > tenancy 명은 처음 Oracle Cloud Subscription 시에 명명합니다.
+    > tenancy 명은 처음 Oracle Cloud Subscription 시에 명명한 이름을 사용합니다.
 
     * https://console.ap-seoul-1.oraclecloud.com/?tenant={tenancy명}
 
@@ -110,11 +114,28 @@
 
     <img src="images/oci-create-oke-cluster-creation.png" width="50%">
 
+* 정상적으로 생성이 되면 생성된 노드의 상태가 ACTIVE가 됩니다.
+  
+  **생성 진행 과정**  
+    ![](images/oci-oke-cluster-created.png)
+    
+  **ACTIVE 상태의 노드**  
+    <img src="images/oci-created-oke-cluster.png" width="50%">
+
+### **STEP 3**: kubectl 와 oci-cli 설치하기
+* 클라이언트에서 OKE 접속을 위해서는 kubeconfig 파일을 생성해야 합니다. kubeconfig 파일을 얻는 과정은 OCI의 OKE Cluster 화면에서 Access **Kubeconfig** 버튼을 클릭하면 확인할 수 있습니다.
+
+    **Access Kubeconfig 버튼** 
+    ![](images/oci-oke-access-kubeconfig-1.png)
+
+    **Kubeconfig를 얻기 위한 과정**
+    ![](images/oci-oke-access-kubeconfig-2.png)
+
+* Kubeconfig를 얻기 위해서는 먼저 **oci-cli**를 설치해야 합니다. Windows의 Command Prompt를 열고 (Windows 좌측 아래 검색 버튼 클릭 후 cmd 입력) 다음과 같이 입력해서 oci-cli를 설치합니다.
+
+    >ㅇㅇㅇ
 
 
-
-
-### **STEP 3**: oci-cli와 kubectl 설치하기
 
 ### **STEP 4**: Wercker 환경 구성하기
 
