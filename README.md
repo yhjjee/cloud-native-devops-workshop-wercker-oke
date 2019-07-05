@@ -71,7 +71,8 @@
 
     [Image Source: https://itexplorer.tistory.com/40]
 
-* Command Prompt에서 다음과 같이 입력해서 C 드라이브에 실습을 위한 Git Repository를 가져옵니다.
+* **Windows PowerShell**에서 다음과 같이 입력해서 C 드라이브에 실습을 위한 Git Repository를 가져옵니다.
+    > #은 구분 표시로 입력하지 않습니다.
     ```
     # cd c:\
     # git clone https://github.com/MangDan/cloud-native-devops-workshop-wercker-oke.git
@@ -103,8 +104,8 @@
 
     ![](images/oci-create-oke-cluster.png)
 
-* 다음과 같이 입력합니다. 
-    > Compute Shape의 의미는 다음과 같습니다. VM.Standard2.1은 Virtual Machine 2세대
+* 다음과 같이 입력합니다.  Virtual Machine Gen2, 1 OCPU에 생성된 네트워크 서브넷당 한개의 쿠버네티스 노드를 생성합니다.
+    > Compute Shape의 의미는 다음과 같습니다. VM.Standard2.1은 Virtual Machine Gen2, 1 OCPU를 의미합니다.
 
     * NAME: oke-cluster1
     * KUBERNETES VERSION: v1.12.7
@@ -131,9 +132,55 @@
     **Kubeconfig를 얻기 위한 과정**
     ![](images/oci-oke-access-kubeconfig-2.png)
 
-* Kubeconfig를 얻기 위해서는 먼저 **oci-cli**를 설치해야 합니다. Windows의 Command Prompt를 열고 (Windows 좌측 아래 검색 버튼 클릭 후 cmd 입력) 다음과 같이 입력해서 oci-cli를 설치합니다.
+* Kubeconfig를 얻기 위해서는 먼저 **oci-cli**를 설치합니다. Windows의 **Windows PowerShell**을 열고 (Windows 좌측 아래 검색 버튼 클릭 후 PowerShell 입력) 다음과 같이 입력해서 oci-cli를 설치합니다.
 
-    >ㅇㅇㅇ
+    > oci-cli 설치를 위해 Python이 우선 설치됩니다.
+    ```
+    # Set-ExecutionPolicy RemoteSigned
+
+    # powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.ps1'))"
+    ```
+
+* Python 설치가 완료되면 oci-cli 설치 경로를 설정합니다. 경로는 기본 경로(c:\Users\사용자명\)에 설치해도 되지만, Windows의 경우 사용자명에 공백이 있을 경우 설치가 되지 않습니다. 본 실습에서는 c:\oracle을 기본 경로로 합니다.
+    ```
+    1. c:\oracle\oci-cli
+    2. c:\oracle\bin
+    3. c:\oracle\bin\oci-cli-scripts
+    4. 추가 패키지 설치 여부 (설치 없이 엔터 치고 넘어갑니다)
+    ```
+
+* 설치가 완료되면 **PowerShell**을 다시 시작한 후 oci-cli 설치를 확인합니다.
+    ```
+    # oci -v
+    ```
+* oci-cli 설치가 완료되면 Oracle Cloud Infrastructure와 연결을 위한 설정을 합니다. 이 때 필요한 정보는 다음과 같습니다.
+    1. User OCID  
+    User OCID는 OCI Console 우측 상단의 사용자 아이콘을 클릭한 후 아이디를 선택하면 확인할 수 있습니다.
+    ![](images/oci-get-user-ocid.png)
+    oci-cli 설치를 위해 필요하기 때문에 User OCID를 복사해서 메모합니다.
+    ![](images/oci-get-user-ocid-copy.png)
+    
+    2. Tenancy OCID
+    Tenancy OCID는 OCI Console 우측 상단의 사용자 아이콘을 클릭한 후 Tenancy를 선택하면 확인할 수 있습니다.
+    ![](images/oci-get-tenancy-ocid.png)
+    oci-cli 설치를 위해 필요하기 때문에 Tenancy OCID를 복사해서 메모합니다.
+    ![](images/oci-get-tenancy-ocid-copy.png)
+
+    3. SSH Key Pair (Public/Private Key)
+    Oracle Cloud Infrastructure에 접속하기 위해서 기본적으로 SSH Key Pair가 필요합니다. macOS나 리눅스 환경에서는 ssh-keygen을 통해 생성하고 Windows 환경에서는 putty를 활용해서 생성합니다. 하지만, 여기서는 이미 생성된 SSH Key Pair를 사용합니다. GitHub에서 Clone한 파일 폴더의 keys 폴더내의 다음 파일을 복사해서 c:\oracle 폴더로 붙여넣기 합니다. **PowerShell** 혹은 Windows탐색기를 사용합니다.
+
+        **Windows PowerShell을 사용하는 경우**
+        ```
+        # cd c:\cloud-native-devops-workshop-wercker-oke\keys
+
+        # cp * c:\oracle
+        ```
+    
+
+ 
+
+
+
 
 
 
