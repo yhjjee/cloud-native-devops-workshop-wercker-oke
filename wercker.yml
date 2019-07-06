@@ -1,14 +1,16 @@
 #Use OpenJDK base docker image from dockerhub and open the application port on the docker container
 box:
 # id: openjdk:8-jdk
-id: jimador/docker-jdk-8-maven-node
+  id: jimador/docker-jdk-8-maven-node
 ports:
-    - 8080
+  - 8080
 
 #Build our application using Maven, just as we always have
 build:
-steps:
+  steps:
     - script:
+        name: pwd
+        code: pwd
     - install-packages:
         packages: maven
     - script:
@@ -22,9 +24,9 @@ steps:
     - npm-install
         
 #Push the docker image with our built and tested application to the Oracle Container Registry
-push-release:
-steps:
-    - internal/microprofile-docker-push:
+push-release-1:
+  steps:
+    - internal/docker-push:
         username: $DOCKER_USERNAME
         password: $OCI_AUTH_TOKEN
         repository: $DOCKER_REGISTRY/$DOCKER_REPO
@@ -34,7 +36,9 @@ steps:
         ports: 8080
         cmd: java -jar target/helidon-movie-api-mp.jar
 
-    - internal/springboot-docker-push:
+push-release-2:
+  steps:
+    - internal/docker-push:
         username: $DOCKER_USERNAME
         password: $OCI_AUTH_TOKEN
         repository: $DOCKER_REGISTRY/$DOCKER_REPO
@@ -46,45 +50,45 @@ steps:
 
 #Deploy our container from the Oracle Container Registry to the Oracle Container Engine (Kubernetes)
 deploy-to-cluster:
-box:
+  box:
     id: alpine
     cmd: /bin/sh
 
-steps:
-- bash-template
+  steps:
+    - bash-template
     
-- kubectl:
-    name: delete secret
-    server: $KUBERNETES_MASTER
-    token: $KUBERNETES_AUTH_TOKEN
-    insecure-skip-tls-verify: true
-    command: delete secret wercker; echo delete registry secret
+    - kubectl:
+        name: delete secret
+        server: $KUBERNETES_MASTER
+        token: $KUBERNETES_AUTH_TOKEN
+        insecure-skip-tls-verify: true
+        command: delete secret wercker; echo delete registry secret
 
-- kubectl:
-    name: create secret
-    server: $KUBERNETES_MASTER
-    token: $KUBERNETES_AUTH_TOKEN
-    insecure-skip-tls-verify: true
-    command: create secret docker-registry wercker --docker-server=$DOCKER_REGISTRY --docker-email=nobody@oracle.com --docker-username=$DOCKER_USERNAME --docker-password='$OCI_AUTH_TOKEN'; echo create registry secret
+    - kubectl:
+        name: create secret
+        server: $KUBERNETES_MASTER
+        token: $KUBERNETES_AUTH_TOKEN
+        insecure-skip-tls-verify: true
+        command: create secret docker-registry wercker --docker-server=$DOCKER_REGISTRY --docker-email=nobody@oracle.com --docker-username=$DOCKER_USERNAME --docker-password='$OCI_AUTH_TOKEN'; echo create registry secret
 
-- script:
-    name: "Visualise Kubernetes config"
-    code: cat kube-helidon-movie-api-mp-config.yml
+    - script:
+        name: "Visualise Kubernetes config"
+        code: cat kube-helidon-movie-api-mp-config.yml
 
-- kubectl:
-    name: deploy helidon-movie-api-mp to kubernetes
-    server: $KUBERNETES_MASTER
-    token: $KUBERNETES_AUTH_TOKEN
-    insecure-skip-tls-verify: true
-    command: apply -f kube-helidon-movie-api-mp-config.yml
+    - kubectl:
+        name: deploy helidon-movie-api-mp to kubernetes
+        server: $KUBERNETES_MASTER
+        token: $KUBERNETES_AUTH_TOKEN
+        insecure-skip-tls-verify: true
+        command: apply -f kube-helidon-movie-api-mp-config.yml
 
-- script:
-    name: "Visualise Kubernetes config"
-    code: cat kube-springboot-movie-people-api-config.yml
+    - script:
+        name: "Visualise Kubernetes config"
+        code: cat kube-springboot-movie-people-api-config.yml
 
-- kubectl:
-    name: deploy springboot-movie-people-api to kubernetes
-    server: $KUBERNETES_MASTER
-    token: $KUBERNETES_AUTH_TOKEN
-    insecure-skip-tls-verify: true
-    command: apply -f kube-springboot-movie-people-api-config.yml
+    - kubectl:
+        name: deploy springboot-movie-people-api to kubernetes
+        server: $KUBERNETES_MASTER
+        token: $KUBERNETES_AUTH_TOKEN
+        insecure-skip-tls-verify: true
+        command: apply -f kube-springboot-movie-people-api-config.yml

@@ -14,7 +14,6 @@
 * 인터넷 접속 가능한 랩탑 (Windows 10이상, Windows 10 이하 버전일 경우 Powershell 필요)
 * GitHub 계정
 * OCI (Oracle Cloud Infrastructure) 계정
-* Git 설치
 
 ***
 
@@ -30,7 +29,7 @@
 
     ![](images/github_verify_email.png)
 
-* 생성한 계정으로 Sign in 합니다.
+* 생성한 계정으로 **Sign in** 합니다.
 
     ![](images/github_signin.png)
 
@@ -66,9 +65,10 @@
 
     > 두 가지 로그인 타입이 있습니다. OCI 전용 계정이 있으며, IDCS라는 계정 관리를 위한 클라우드 서비스와 연동 (Federation)해서 사용하는 계정이 있습니다. 생성한 계정 타입을 확인 후 관련 계정으로 로그인 합니다.
 
+* 로그인 화면
     ![](images/oci-login.png)
 
-    좌측 상단의 햄버거 모양의 아이콘을 클릭합니다.
+* 좌측 상단의 햄버거 모양의 아이콘을 클릭합니다.
     ![](images/oci-console.png)
 
 * 좌측 메뉴 중 **Developer Services** > **Container Clusters (OKE)** 선택합니다.
@@ -76,7 +76,7 @@
     ![](images/oci-menu-oke.png)
 
 * OKE Cluster를 생성 할 Compartment를 선택합니다.
-    > Compartment는 OCI에서 관리하는 리소스들을 그룹으로 묶어서 관리하기 위해 제공되는 기능입니다. 일반적으로 팀 단위로 리소스(Compute, Network, Storage등)를 관리하기 위한 목적으로 사용됩니다. Compartment는 구성하기 나름이기 때문에 아래 스크린샷과 다를 수 있습니다.
+    > Compartment는 OCI에서 관리하는 리소스들을 그룹으로 묶어서 관리하기 위해 제공되는 기능입니다. 일반적으로 팀 단위로 리소스(Compute, Network, Storage등)를 관리하기 위한 목적으로 사용됩니다. Compartment 이름은 아래 스크린샷과 다를 수 있습니다.
 
     ![](images/oci-create-oke-cluster-compartment.png)
 
@@ -104,7 +104,8 @@
     <img src="images/oci-created-oke-cluster.png" width="50%">
 
 ### **STEP 3**: kubectl과 oci-cli 설치하기
-* kubectl 제공되는 Git Repository에서 Clone으로 다운로드 받은 c:\cloud-native-devops-workshop-wercker-oke 폴더안에도 같이 포함되어 있으므로 이 파일을 사용합니다. ==> 다운로드 할 수 있는 경로를 따로 지정해서 설치하도록 수정...
+* kubectl 제공되는 Git Repository에서 Clone으로 다운로드 받은 c:\cloud-native-devops-workshop-wercker-oke 폴더안에도 같이 포함되어 있으므로 이 파일을 사용합니다. 
+TO-DO 다운로드 할 수 있는 경로를 따로 지정해서 설치하도록 수정...
 
     > 선택사항) 참고로 kubectl 직접 설치를 하고 싶으면 아래 curl 명령어를 통해 설치 가능합니다. 다만, curl 명령어는 Windows Prompt (cmd)에서 실행 합니다. (PowerShell 에서는 옵션이 다름)
     > ```
@@ -121,7 +122,14 @@
 
     > **위 내용은 oci-cli 설치 후 실행할 내용이므로 꼭 메모합니다.**
 
-* Kubeconfig를 얻기 위해서는 먼저 **oci-cli**를 설치합니다. Windows의 **Windows PowerShell**을 열고 (Windows 좌측 아래 검색 버튼 클릭 후 PowerShell 입력) 다음과 같이 입력해서 oci-cli를 설치합니다.
+* Kubeconfig를 얻기 위해서는 먼저 **oci-cli**를 설치합니다. 먼저, Windows 좌측 하단의 검색 버튼을 클릭하고 **PowerShell**을 입력한 후 **Windows PowerShell**을 관리자 모드(중요)로 실행합니다.
+
+    <img src="images/windows-search-powershell.png" width="50%">
+
+    ![](images/windows-powershell.png)
+
+
+* **Windows PowerShell**에서 다음과 같이 명령어를 실행하여 oci-cli를 설치합니다.
 
     > oci-cli 설치를 위해 Python이 자동으로 설치됩니다.
     ```
@@ -130,7 +138,7 @@
     # powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.ps1'))"
     ```
 
-* Python 설치가 완료되면 oci-cli 설치 경로를 설정합니다. 경로는 기본 경로(c:\Users\사용자명\)에 설치해도 되지만, Windows의 경우 사용자명에 공백이 있을 경우 설치가 되지 않습니다. 사용자명에 공백이 있을 경우에는 다음과 같이 c:\oracle 경로에 설치합니다.
+* Python이 자동으로 설치가 완료되면 oci-cli 설치 경로를 지정해야 합니다. 경로는 기본 경로(c:\Users\사용자명\)에 설치해도 되지만, Windows의 경우 사용자명에 공백이 있으면 설치가 되지 않습니다. 사용자명에 공백이 있을 경우에는 다음과 같이 c:\oracle 경로에 설치합니다. (공백이 없으면 기본 경로에 설치)
     ```
     1. c:\oracle\oci-cli
     2. c:\oracle\bin
@@ -138,7 +146,7 @@
     4. 추가 패키지 설치 여부 (설치 없이 엔터 치고 넘어갑니다)
     ```
 
-* 설치가 완료되면 **PowerShell**을 다시 시작한 후 oci-cli 설치를 확인합니다.
+* 설치가 완료되면 **PowerShell**을 종료 후 다시 시작해서(관리자 모드) oci-cli 설치를 확인합니다.
     ```
     # oci -v
     ```
@@ -159,7 +167,7 @@
     3. Region
     여기서는 서울 리전으로 지정합니다. (ap-seoul-1)
 
-* oci-cli 설정을 진행합니다. **Windows Powershell**에서 다음과 같이 입력합니다.
+* oci-cli 설정을 진행합니다. **Windows Powershell(관리자 모드)**에서 다음과 같이 입력합니다.
     ```
     # oci setup config
     ```
@@ -180,17 +188,17 @@
 * c:\Users\사용자이름\.oci 폴더와 config 파일, SSH Key Pair(.pem)가 생성됩니다. SSH Key 중에서 Public Key를 OCI API Key로 등록합니다. 아래와 같이 우측 상단의 사용자 아이콘 클릭 후 사용자 아이디를 클릭 합니다.
     ![](images/oci-get-user-ocid.png)
 
-    좌측 **API Keys** 메뉴 선택 후 **Add Public Key** 버튼 클릭합니다. **PUBLIC KEY** 영역에 위에서 가져온 키 중에서 oci_api_key_public.pem 파일의 내용을 복사해서 붙여넣기 한 후 **Add** 버튼을 클릭합니다.
+* 좌측 **API Keys** 메뉴 선택 후 **Add Public Key** 버튼 클릭합니다. **PUBLIC KEY** 영역에 위에서 가져온 키 중에서 oci_api_key_public.pem 파일의 내용을 복사해서 붙여넣기 한 후 **Add** 버튼을 클릭합니다.
     ![](images/oci-add-api-key.png)
 
-* kubeconfig를 생성합니다. 먼저 **Windows PowerShell**을 통해서 다음과 같이 실행해서 oracle 폴더 하위에 kube 폴더를 생성합니다.
+* kubeconfig를 생성합니다. 먼저 **Windows PowerShell**을 통해서 다음과 같이 실행해서 oracle 폴더 하위에 .kube 폴더를 생성합니다.
     ```
     # cd $HOME
 
     # mkdir .kube
     ```
  
- * 앞에서 메모한 kubeconfig 생성 명령어를 실행합니다. 
+* 앞에서 메모한 kubeconfig 생성 명령어를 실행합니다. 
     ```
     # oci ce cluster create-kubeconfig --cluster-id ocid1.cluster.oc1.ap-seoul-1.aaaaaaaaae2dey3fha3diylfgrtgknrugbtdgnjwha2tizddhctdeobrhe4d --file $HOME/.kube/config --region ap-seoul-1
     ```
@@ -223,10 +231,10 @@
 
     ![](images/github-clone-url-import.png)
 
-    **Import 완료**가 되면 Repository 링크를 클릭해서 확인합니다.
+* **Import 완료**가 되면 Repository 링크를 클릭해서 확인합니다.
     ![](images/github-import-complete.png)
 
-    **Import 완료**
+* **Import 완료**
     ![](images/github-get-repository.png)
     
 
@@ -240,7 +248,7 @@
 
     ![](images/wercker-create-select-scm.png)
 
-* 앞서 생성한 GitHub Repository가 보입니다. 선택 후 **Next** 버튼을 클릭 합니다.
+* 앞에서 생성한 GitHub Repository가 보입니다. 선택 후 **Next** 버튼을 클릭 합니다.
 
     ![](images/github-select-repo.png)
 
@@ -252,7 +260,7 @@
 
     ![](images/wercker-app-create.png)
 
-    **Wercker Application 생성**
+* **Wercker Application 생성**
     ![](images/wercker-app-created.png)
 
 
@@ -268,9 +276,9 @@
     5. KUBERNETES_MASTER
     6. KUBERNETES_AUTH_TOKEN
     
-    여기서 KUBERNETES_MASTER와 KUBERNETES_AUTH_TOKEN에 대한 정보는 $HOME/.kube/config 파일의 내용에서 가져올 것입니다.
+    > 여기서 KUBERNETES_MASTER와 KUBERNETES_AUTH_TOKEN은 $HOME/.kube/config 파일의 내용을 참조해서 설정합니다.
 
-    * OCI_AUTH_TOKEN
+    1. OCI_AUTH_TOKEN
         * OCI Console 우측 상단의 사용자 아이디를 클릭 후 좌측 **Auth Tokens**를 선택한 후 **Generate Token**을 클릭합니다.
         ![](images/oci-generate-auth-token.png)
         
@@ -285,30 +293,34 @@
 
         ![](images/wercker-env-key1.png)
         
-    * DOCKER_REGISTRY
+    2. DOCKER_REGISTRY
         * Container Registry는 각 리전별로 존재합니다. Registry는 리전키 + ocir.io로 구성되는데, 리전키의 경우는 현재 icn(서울), nrt(도쿄), yyz(토론토), fra(프랑크푸르트), lhr(런던), iad(애쉬번), phx(피닉스)입니다. 여기서는 서울 리전에 있는 Registry를 사용하도록 하겠습니다.
 
         **Key:** DOCKER_REGISTRY  
         **Value:** icn.ocir.io
 
-    * DOCKER_USERNAME
+    3. DOCKER_USERNAME
         * Docker Username은 OCI 사용자 아이디입니다. OCI Console 우측 상단의 사람 아이콘을 클릭해서 확인할 수 있습니다. 여기에 Tenancy명이 필요합니다. 보통 이름은 다음과 같이 구성됩니다.
 
         **Key:** DOCKER_USERNAME  
         **Value:** {Tenancy명}/oracleidentitycloudservice/이메일 계정 (예. busanbank1/oracleidentitycloudservice/donghu.kim@oracle.com)
 
-    * DOCKER_REPO
+    4. DOCKER_REPO
         * Docker Repository이름으로 Tenancy명 + {레파지토리명}입니다. 레파지토리 이름은 임의 지정합니다.
 
         **Key:** DOCKER_REPO  
         **Value:** {Tenancy명}/{레파지토리 명} (예. busanbank1/oracle-devops-workshop)
 
-    * KUBERNETES_MASTER와 KUBERNETES_AUTH_TOKEN는 .kube/config 파일에서 얻을 수 있습니다. 해당 파일을 편집기로 열어서 MASTER와 TOKEN을 복사해서 입력합니다.
+    5. KUBERNETES_MASTER는 .kube/config 파일에서 얻을 수 있습니다. 해당 파일을 편집기로 열어서 MASTER 서버 주소를 복사해서 입력합니다.
 
-        ![](images/oci-oke-kubeconfig.png)
+        ![](images/oci-oke-kubeconfig-master-server.png)
   
         **Key:** KUBERNETES_MASTER 
         **Value:**: KUBERNETES MASTER URL (예. https://c3donjwgqzd.ap-seoul-1.clusters.oci.oraclecloud.com:6443)
+
+    6. KUBERNETES_AUTH_TOKEN도 마찬가지로 .kube/config 파일에서 얻을 수 있습니다. 해당 파일을 편집기로 열어서 AUTH TOKEN을 복사해서 입력합니다.
+
+        ![](images/oci-oke-kubeconfig-auth-token.png)
 
         **Key:** KUBERNETES_AUTH_TOKEN 
         **Value:**: KUBERNETES AUTH TOKEN (예. LS0tLS1CRUdJTiBDRVJUSU................)
@@ -317,6 +329,7 @@
     ![](images/wercker-env-completed.png)
 
 ### **STEP 6**: Wercker CI/CD Pipeline 구성하기
+> 이미 다 구성된 파일이므로, 내용만 확인합니다.
 * 자신의 Git Repository (cloud-native-devops-workshop-wercker-oke)에 접속하면 처음에 생성 시 가져온 파일 중에서 다음 3개의 설정 파일을 확인할 수 있습니다.
 
     3개의 설정 파일은 다음과 같습니다.
@@ -331,59 +344,61 @@
     ```yml
     # 도커 허브에서 아래 이미지를 가져와서 빌드를 위한 컨테이너 환경을 만듭니다.
     box:
-    id: jimador/docker-jdk-8-maven-node
-    ports:
+      id: jimador/docker-jdk-8-maven-node
+      ports:
         - 8080
 
     # build 파이프라인 입니다. 각 파이프라인 안에는 작업 단위인 step이 포함됩니다. 여기서는 maven을 설치하고, 두개의 서비스를 빌드 및 JUnit 테스트를 거쳐 jar 파일을 만듭니다.
     build:
-    steps:
+      steps:
         - script:
         - install-packages:
             packages: maven
             ...
             
     # push-release 파이프라인 입니다. 두 개의 서비스를 컨테이너 이미지화 하여 Oracle Container Registry에 Push를 합니다.
-    push-release:
-    steps:
+    push-release-1:
+      steps:
         - internal/microprofile-docker-push:
             .... helidon(microprofile) 서비스 컨테이너 이미지 생성, 이미지 푸시
 
+    push-release-2:
+      steps:
         - internal/springboot-docker-push:
             .... spring-boot 서비스 컨테이너 이미지 생성, 이미지 푸시
 
     # deploy-to-cluster 파이프라인 입니다. 두 개의 서비스에 대한 Pod를 Kubernetes 노드에 생성하고 서비스로 노출합니다.
     deploy-to-cluster:
-    box:
+      box:
         id: alpine
         cmd: /bin/sh
 
-    steps:
-    - bash-template
+      steps:
+      - bash-template
         
-    - kubectl:
-        name: delete secret
-        ... Wercker에서 Docker Registry 접속을 위한 Secret이 존재할 경우 삭제
+      - kubectl:
+          name: delete secret
+          ... Wercker에서 Docker Registry 접속을 위한 Secret이 존재할 경우 삭제
 
-    - kubectl:
-        name: create secret
-        ... Wercker에서 Docker Registry 접속을 위한 Secret을 다시 생성
+      - kubectl:
+          name: create secret
+          ... Wercker에서 Docker Registry 접속을 위한 Secret을 다시 생성
 
-    - script:
-        name: "Visualise Kubernetes config"
-        code: cat kube-helidon-movie-api-mp-config.yml
+      - script:
+          name: "Visualise Kubernetes config"
+          code: cat kube-helidon-movie-api-mp-config.yml
 
-    - kubectl:
-        name: deploy helidon-movie-api-mp to kubernetes
-        ... helidon-movie-api-mp 서비스 Pod 생성
+      - kubectl:
+          name: deploy helidon-movie-api-mp to kubernetes
+          ... helidon-movie-api-mp 서비스 Pod 생성
     
-    - script:
-        name: "Visualise Kubernetes config"
-        code: cat kube-springboot-movie-people-api-config.yml
+      - script:
+          name: "Visualise Kubernetes config"
+          code: cat kube-springboot-movie-people-api-config.yml
 
-    - kubectl:
-        name: deploy springboot-movie-people-api to kubernetes
-        ... springboot-movie-people-api 서비스 Pod 생성
+      - kubectl:
+          name: deploy springboot-movie-people-api to kubernetes
+          ... springboot-movie-people-api 서비스 Pod 생성
     ```
 
 * 위 wercker.yml에는 다음과 같이 3개의 파이프라인을 임의로 지정했습니다. 
@@ -427,19 +442,47 @@
 * 상단 **Runs**탭을 선택합니다. 아래 **trigger a build now.** 링크를 클릭합니다. 최초 파이프라인 실행할 경우만 이 버튼으로 실행하며, 이후부터는 GitHub의 변경사항이 발생할 경우 자동으로 빌드 파이프라인이 실행됩니다.
     ![](images/wercker-first-build.png)
 
+* **Build** 파이프라인이 시작되었습니다.
+    ![](images/wercker-start-workflow-pipeline.png)
+
+
+* 모든 파이프라인 (빌드/테스트/패키징 --> 이미지 생성 및 레지스트리 등록 --> 쿠버네티스 파드 컨테이너 생성)이 오류 없이 정상적으로 완료되었습니다. 
+    ![](images/wercker-workflow-pipeline-run-completed.png)
+
+  
+
+### **STEP 8**: Oracle Container Registry (OCIR) 확인
+* OCI에 접속 (https://console.ap-seoul-1.oraclecloud.com?tenant=busanbank1) 후 좌측 **Developer Services** > **Registry (OCIR)** 클릭 합니다.
+    ![](images/oci-menu-ocir.png)
+
+* OCIR에 이미지가 등록되었습니다. 현재 Helidon(Microprofile)과 Spring Boot으로 개발된 서비스가 이미지로 등록된 것을 확인할 수 있습니다.
+    ![](images/oci-ocir-repository-1.png)
+
+### **STEP 9**: Oracle Kubernetes Engine (OKE) 에 배포된 Pod와 Service 확인
+* **Windows PowerShell**을 열고 다음과 같이 명령어를 실행합니다.
+
+    ```
+    # kubectl get all
+    ```
+
+* 다음과 같이 **Running**상태의 두 개의 서비스와 서비스의 **External IP**를 확인할 수 있습니다.
+    ![](images/kubectl-get-all.png)
 
 
 
+### **STEP 10**: 최종 배포된 서비스 확인
+* 브라우저를 열고 다음과 같이 확인한 External IP로 접속합니다.
+    * Helidon(Microprofile) Movie 서비스 확인
+        ```
+        http://{External_IP}:30000/api/search/v1/movies
+        ```
 
+    * Spring Boot Movie People 서비스 확인
+        ```
+        http://{External_IP}:31000/moviepeople
+        ```
 
-### **STEP 7**: 애플리케이션을 GitHub에 커밋하기
-
-### **STEP 8**: CI/CD 파이프라인 진행 모니터링 하기
-
-### **STEP 9**: Kubernetes 배포된 Pod와 Service 확인
-
-### **STEP 10**: 최종 배포된 애플리케이션 확인
-
+### 여기서 JET를 보여줄 지 확인 (TO-DO)
 
 
 
