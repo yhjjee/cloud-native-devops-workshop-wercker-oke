@@ -433,11 +433,11 @@ TO-DO 다운로드 할 수 있는 경로를 따로 지정해서 설치하도록 
 
     ![](images/wercker-create-pipeline-push-1.png)
 
-* 생성 후 다시 상단 **Workflows**탭을 클릭 합니다. 동일하게 세 번째 파이프라인인 **push-release-2**를 입력하고 **Create**버튼을 클릭합니다.
+* 다시 상단 **Workflows**탭을 클릭 합니다. 동일하게 세 번째 파이프라인인 **push-release-2**를 입력하고 **Create**버튼을 클릭합니다.
 
     ![](images/wercker-create-pipeline-push-2.png)
 
-* 생다시 상단 **Workflows**탭을 클릭 후 동일하게 네 번째 파이프라인인 **deploy-to-cluster**를 입력하고 **Create**버튼을 클릭합니다.
+* 상단 **Workflows**탭을 클릭 후 동일하게 네 번째 파이프라인인 **deploy-to-cluster**를 입력하고 **Create**버튼을 클릭합니다.
 
     ![](images/wercker-create-pipeline-2.png)
 
