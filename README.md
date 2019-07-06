@@ -181,7 +181,7 @@ TO-DO 다운로드 할 수 있는 경로를 따로 지정해서 설치하도록 
     3. Region
     여기서는 서울 리전으로 지정합니다. (ap-seoul-1)
 
-* oci-cli 설정을 진행합니다. **Windows Powershell(관리자 모드)**에서 다음과 같이 입력합니다.
+* oci-cli 설정을 진행합니다. **Windows Powershell(관리자 모드)** 에서 다음과 같이 입력합니다.
     ```
     # oci setup config
     ```
@@ -202,7 +202,7 @@ TO-DO 다운로드 할 수 있는 경로를 따로 지정해서 설치하도록 
 * c:\Users\사용자이름\.oci 폴더와 config 파일, SSH Key Pair(.pem)가 생성됩니다. SSH Key 중에서 Public Key를 OCI API Key로 등록합니다. 아래와 같이 우측 상단의 사용자 아이콘 클릭 후 사용자 아이디를 클릭 합니다.
     ![](images/oci-get-user-ocid.png)
 
-* 좌측 **API Keys** 메뉴 선택 후 **Add Public Key** 버튼 클릭합니다. **PUBLIC KEY** 영역에 위에서 가져온 키 중에서 oci_api_key_public.pem 파일의 내용을 복사해서 붙여넣기 한 후 **Add** 버튼을 클릭합니다.
+* 좌측 **API Keys** 메뉴 선택 후 **Add Public Key** 버튼 클릭합니다. **PUBLIC KEY** 영역에 위에서 생성한 키 중에서 oci_api_key_public.pem 파일의 내용을 복사해서 붙여넣기 한 후 **Add** 버튼을 클릭합니다.
     ![](images/oci-add-api-key.png)
 
 * kubeconfig를 생성합니다. 먼저 **Windows PowerShell**을 통해서 다음과 같이 실행해서 oracle 폴더 하위에 .kube 폴더를 생성합니다.
@@ -329,14 +329,14 @@ TO-DO 다운로드 할 수 있는 경로를 따로 지정해서 설치하도록 
 
         ![](images/oci-oke-kubeconfig-master-server.png)
   
-        **Key:** KUBERNETES_MASTER 
+        **Key:** KUBERNETES_MASTER  
         **Value:**: KUBERNETES MASTER URL (예. https://c3donjwgqzd.ap-seoul-1.clusters.oci.oraclecloud.com:6443)
 
     6. KUBERNETES_AUTH_TOKEN도 마찬가지로 .kube/config 파일에서 얻을 수 있습니다. 해당 파일을 편집기로 열어서 AUTH TOKEN을 복사해서 입력합니다.
 
         ![](images/oci-oke-kubeconfig-auth-token.png)
 
-        **Key:** KUBERNETES_AUTH_TOKEN 
+        **Key:** KUBERNETES_AUTH_TOKEN  
         **Value:**: KUBERNETES AUTH TOKEN (예. LS0tLS1CRUdJTiBDRVJUSU................)
 
 * Wercker Application 환경 설정을 완료한 모습입니다.
@@ -415,21 +415,29 @@ TO-DO 다운로드 할 수 있는 경로를 따로 지정해서 설치하도록 
           ... springboot-movie-people-api 서비스 Pod 생성
     ```
 
-* 위 wercker.yml에는 다음과 같이 3개의 파이프라인을 임의로 지정했습니다. 
+* 위 wercker.yml에는 다음과 같이 4개의 파이프라인을 임의로 지정했습니다. 
     * build
-    * push-release
+        * 프로젝트를 빌드/테스트/패키징(jar) 합니다.
+    * push-release-1
+        * Helidon (Microprofile) 프로젝트를 컨테이너 이미지화 하여 Container Registry에 푸시합니다.
+    * push-release-2
+        * Spring Boot 프로젝트를 컨테이너 이미지화 하여 Container Registry에 푸시합니다.
     * deploy-to-cluster
+        * 컨테이너 이미지를 가져와서(pull) 쿠버네티스 노드에 Pod를 생성하고 서비스를 시작합니다.
 
 * wercker.yml 파일에 정의한 파이프라인을 Wercker에 등록하고 Workflow를 구성합니다. 먼저 Wercker (https://app.wercker.com)에 접속한 후 **Workflows**탭을 선택합니다. 중간에 보면 **build** 파이프라인은 디폴트로 만들어져 있습니다.(변경 가능합니다.) 아래 **Add new Pipeline** 버튼을 클릭합니다.
 
     ![](images/wercker-workflows-add-pipeline.png)
     
-* **build**는 이미 생성되어 있기 때문에 두 번째 파이프라인인 **push-release**를 입력하고 **Create**버튼을 클릭합니다. 
+* **build**는 이미 생성되어 있기 때문에 두 번째 파이프라인인 **push-release-1**을 입력하고 **Create**버튼을 클릭합니다. 
 
-    ![](images/wercker-create-pipeline-1.png)
+    ![](images/wercker-create-pipeline-push-1.png)
 
-* 생성 후 다시 상단 **Workflows**탭을 클릭 합니다.  
-    동일하게 세 번째 파이프라인인 **deploy-to-cluster**를 입력하고 **Create**버튼을 클릭합니다.
+* 생성 후 다시 상단 **Workflows**탭을 클릭 합니다. 동일하게 세 번째 파이프라인인 **push-release-2**를 입력하고 **Create**버튼을 클릭합니다.
+
+    ![](images/wercker-create-pipeline-push-2.png)
+
+* 생다시 상단 **Workflows**탭을 클릭 후 동일하게 네 번째 파이프라인인 **deploy-to-cluster**를 입력하고 **Create**버튼을 클릭합니다.
 
     ![](images/wercker-create-pipeline-2.png)
 
@@ -437,17 +445,25 @@ TO-DO 다운로드 할 수 있는 경로를 따로 지정해서 설치하도록 
 
     ![](images/wercker-create-workflow-add.png)
 
-* 맨 아래 ***pipeline**을 **push-release** 선택 후 **Add**버튼을 클릭 합니다.
+* 맨 아래 **pipeline**을 **push-release-1** 선택 후 **Add**버튼을 클릭 합니다.
 
     ![](images/wercker-workflow-add-1.png)
 
-* 다시 **push-release** 파이프라인 옆 **+** 아이콘을 클릭 합니다.
+* **push-release-1** 파이프라인 옆 **+** 아이콘을 클릭 합니다.
 
     ![](images/wercker-workflow-add-2.png)
 
-* 맨 아래 **pipeline**을 **deploy-to-cluster** 선택 후 **Add**버튼을 클릭 합니다.
+* **push-release-2** 선택 후 **Add**버튼을 클릭 합니다.
 
     ![](images/wercker-workflow-add-3.png)
+
+* **push-release-2** 파이프라인 옆 **+** 아이콘을 클릭 합니다.
+
+    ![](images/wercker-workflow-add-4.png)
+
+* **deploy-to-cluster** 선택 후 **Add**버튼을 클릭 합니다.
+
+    ![](images/wercker-workflow-add-5.png)
 
 * 완성된 Wercker Workflow 모습입니다.
     ![](images/wercker-workflow-complete.png)
@@ -495,30 +511,3 @@ TO-DO 다운로드 할 수 있는 경로를 따로 지정해서 설치하도록 
         ```
         http://{External_IP}:31000/moviepeople
         ```
-
-### 여기서 JET를 보여줄 지 확인 (TO-DO)
-
-
-
-
-
-
-
-
-### Git 설치
-* Git 설치는 아래 블로그를 참고하여 설치합니다.  
-    * https://boogong.tistory.com/58
-
-### Git Repository Clone
-* Git 설치가 완료되면 실습을 위해 제공된 GitHub Repository를 로컬에 다운로드 받는 Clone 작업을 합니다. 먼저, Windows 좌측 하단의 검색 버튼을 클릭하고 **PowerShell**을 입력한 후 **Windows PowerShell**을 실행합니다.
-
-    <img src="images/windows-search-powershell.png" width="50%">
-
-    ![](images/windows-powershell.png)
-
-* **Windows PowerShell**에서 다음과 같이 입력해서 C 드라이브에 실습을 위한 Git Repository를 가져옵니다.
-    > #은 구분 표시로 입력하지 않습니다.
-    ```
-    # cd c:\
-    # git clone https://github.com/MangDan/cloud-native-devops-workshop-wercker-oke.git
-    ```
