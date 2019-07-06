@@ -226,6 +226,10 @@
     **Import 완료**가 되면 Repository 링크를 클릭해서 확인합니다.
     ![](images/github-import-complete.png)
 
+    **Import 완료**
+    ![](images/github-get-repository.png)
+    
+
 ### **STEP 5**: Wercker 환경 구성하기
 * https://app.wercker.com 에 접속 후 **LOG IN WITH GITHUB** 클릭 후 생성한 계정을 통해 로그인한 후 **Create your first application**을 클릭합니다. 
     > Wercker Application은 하나의 Git Repository와 연결되는 파이프라인을 구성하기 위한 단위입니다.
@@ -312,8 +316,10 @@
 * Wercker Application 환경 설정을 완료한 모습입니다.
     ![](images/wercker-env-completed.png)
 
-### **STEP 6**: Wercker와 Kubernetes 설정 파일 구성하기 (옵션: Blue/Green Deployment)
-* 로컬에 다운로드 받은 Git Repository 폴더 (c:\cloud-native-devops-workshop-wercker-oke)에 작성된 설정 파일을 사용합니다. 설정 파일은 다음과 같습니다.
+### **STEP 6**: Wercker CI/CD Pipeline 구성하기
+* 자신의 Git Repository (cloud-native-devops-workshop-wercker-oke)에 접속하면 처음에 생성 시 가져온 파일 중에서 다음 3개의 설정 파일을 확인할 수 있습니다.
+
+    3개의 설정 파일은 다음과 같습니다.
     * wercker.yml
         * Wercker CI/CD의 Pipeline을 구성을 위한 설정 파일
     * kube-helidon-movie-api-mp-config.yml.template
@@ -321,8 +327,110 @@
     * kube-springboot-movie-people-api-config.yml.template
         * springboot-movie-people-api 서비스를 Kubernetes 환경에 배포하기 위한 설정 파일
 
+* Git Repository에서 wercker.yml 파일을 클릭합니다. 다음과 같은 내용을 볼 수 있습니다. (내용이 길기 때문에 중요한 부분만 요약해서 설명합니다.)
+    ```yml
+    # 도커 허브에서 아래 이미지를 가져와서 빌드를 위한 컨테이너 환경을 만듭니다.
+    box:
+    id: jimador/docker-jdk-8-maven-node
+    ports:
+        - 8080
 
-### **STEP 6**: Wercker CI/CD Pipeline 구성하기
+    # build 파이프라인 입니다. 각 파이프라인 안에는 작업 단위인 step이 포함됩니다. 여기서는 maven을 설치하고, 두개의 서비스를 빌드 및 JUnit 테스트를 거쳐 jar 파일을 만듭니다.
+    build:
+    steps:
+        - script:
+        - install-packages:
+            packages: maven
+            ...
+            
+    # push-release 파이프라인 입니다. 두 개의 서비스를 컨테이너 이미지화 하여 Oracle Container Registry에 Push를 합니다.
+    push-release:
+    steps:
+        - internal/microprofile-docker-push:
+            .... helidon(microprofile) 서비스 컨테이너 이미지 생성, 이미지 푸시
+
+        - internal/springboot-docker-push:
+            .... spring-boot 서비스 컨테이너 이미지 생성, 이미지 푸시
+
+    # deploy-to-cluster 파이프라인 입니다. 두 개의 서비스에 대한 Pod를 Kubernetes 노드에 생성하고 서비스로 노출합니다.
+    deploy-to-cluster:
+    box:
+        id: alpine
+        cmd: /bin/sh
+
+    steps:
+    - bash-template
+        
+    - kubectl:
+        name: delete secret
+        ... Wercker에서 Docker Registry 접속을 위한 Secret이 존재할 경우 삭제
+
+    - kubectl:
+        name: create secret
+        ... Wercker에서 Docker Registry 접속을 위한 Secret을 다시 생성
+
+    - script:
+        name: "Visualise Kubernetes config"
+        code: cat kube-helidon-movie-api-mp-config.yml
+
+    - kubectl:
+        name: deploy helidon-movie-api-mp to kubernetes
+        ... helidon-movie-api-mp 서비스 Pod 생성
+    
+    - script:
+        name: "Visualise Kubernetes config"
+        code: cat kube-springboot-movie-people-api-config.yml
+
+    - kubectl:
+        name: deploy springboot-movie-people-api to kubernetes
+        ... springboot-movie-people-api 서비스 Pod 생성
+    ```
+
+* 위 wercker.yml에는 다음과 같이 3개의 파이프라인을 임의로 지정했습니다. 
+    * build
+    * push-release
+    * deploy-to-cluster
+
+* wercker.yml 파일에 정의한 파이프라인을 Wercker에 등록하고 Workflow를 구성합니다. 먼저 Wercker (https://app.wercker.com)에 접속한 후 **Workflows**탭을 선택합니다. 중간에 보면 **build** 파이프라인은 디폴트로 만들어져 있습니다.(변경 가능합니다.) 아래 **Add new Pipeline** 버튼을 클릭합니다.
+
+    ![](images/wercker-workflows-add-pipeline.png)
+    
+* **build**는 이미 생성되어 있기 때문에 두 번째 파이프라인인 **push-release**를 입력하고 **Create**버튼을 클릭합니다. 
+
+    ![](images/wercker-create-pipeline-1.png)
+
+* 생성 후 다시 상단 **Workflows**탭을 클릭 합니다.  
+    동일하게 세 번째 파이프라인인 **deploy-to-cluster**를 입력하고 **Create**버튼을 클릭합니다.
+
+    ![](images/wercker-create-pipeline-2.png)
+
+* 다시 상단 **Workflows**탭을 클릭한 후 **Workflow** 구성을 위해 **build** 파이프라인 옆 **+** 아이콘을 클릭 합니다.
+
+    ![](images/wercker-create-workflow-add.png)
+
+* 맨 아래 ***pipeline**을 **push-release** 선택 후 **Add**버튼을 클릭 합니다.
+
+    ![](images/wercker-workflow-add-1.png)
+
+* 다시 **push-release** 파이프라인 옆 **+** 아이콘을 클릭 합니다.
+
+    ![](images/wercker-workflow-add-2.png)
+
+* 맨 아래 **pipeline**을 **deploy-to-cluster** 선택 후 **Add**버튼을 클릭 합니다.
+
+    ![](images/wercker-workflow-add-3.png)
+
+* 완성된 Wercker Workflow 모습입니다.
+    ![](images/wercker-workflow-complete.png)
+
+### **STEP 7**: Wercker 파이프라인 실행
+* 상단 **Runs**탭을 선택합니다. 아래 **trigger a build now.** 링크를 클릭합니다. 최초 파이프라인 실행할 경우만 이 버튼으로 실행하며, 이후부터는 GitHub의 변경사항이 발생할 경우 자동으로 빌드 파이프라인이 실행됩니다.
+    ![](images/wercker-first-build.png)
+
+
+
+
+
 
 ### **STEP 7**: 애플리케이션을 GitHub에 커밋하기
 
