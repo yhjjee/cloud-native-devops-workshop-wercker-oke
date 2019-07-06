@@ -15,9 +15,23 @@
 * GitHub 계정
 * OCI (Oracle Cloud Infrastructure) 계정
 
+## Steps
+본 실습은 총 10단계로 구성되어 있습니다.
+
+1. **STEP 1**: Setup
+2. **STEP 2**: OCI에서 Kubernetes Cluster 생성하기
+3. **STEP 3**: kubectl과 oci-cli 설치하기
+4. **STEP 4**: GitHub Repository 생성하기
+5. **STEP 5**: Wercker 환경 구성하기
+6. **STEP 6**: Wercker CI/CD Pipeline 구성하기
+7. **STEP 7**: Wercker 파이프라인 실행하기
+8. **STEP 8**: Oracle Container Registry (OCIR) 확인
+9. **STEP 9**: Oracle Kubernetes Engine (OKE) 에 생성(배포)된 Pod와 Service 확인하기
+10. **STEP 10**: 서비스 확인하기
+
 ***
 
-## **STEP 1**:  Setup
+## **STEP 1**: Setup
 
 ### GitHub 계정 생성
 * https://github.com 에 접속해서 우측 상단 **Sign up**을 클릭합니다.
@@ -210,7 +224,7 @@ TO-DO 다운로드 할 수 있는 경로를 따로 지정해서 설치하도록 
     # type config
     ```
 
-### **STEP 4**: GitHub Repository 생성
+### **STEP 4**: GitHub Repository 생성하기
 * https://github.com 에 접속 후 우측 상단의 **Sign in** 클릭 하여 로그인합니다. 좌측 **Create a repository**를 클릭 합니다.
 
     ![](images/github-create-repo.png)
@@ -438,7 +452,7 @@ TO-DO 다운로드 할 수 있는 경로를 따로 지정해서 설치하도록 
 * 완성된 Wercker Workflow 모습입니다.
     ![](images/wercker-workflow-complete.png)
 
-### **STEP 7**: Wercker 파이프라인 실행
+### **STEP 7**: Wercker 파이프라인 실행하기
 * 상단 **Runs**탭을 선택합니다. 아래 **trigger a build now.** 링크를 클릭합니다. 최초 파이프라인 실행할 경우만 이 버튼으로 실행하며, 이후부터는 GitHub의 변경사항이 발생할 경우 자동으로 빌드 파이프라인이 실행됩니다.
     ![](images/wercker-first-build.png)
 
@@ -451,14 +465,14 @@ TO-DO 다운로드 할 수 있는 경로를 따로 지정해서 설치하도록 
 
   
 
-### **STEP 8**: Oracle Container Registry (OCIR) 확인
+### **STEP 8**: Oracle Container Registry (OCIR) 확인하기
 * OCI에 접속 (https://console.ap-seoul-1.oraclecloud.com?tenant=busanbank1) 후 좌측 **Developer Services** > **Registry (OCIR)** 클릭 합니다.
     ![](images/oci-menu-ocir.png)
 
 * OCIR에 이미지가 등록되었습니다. 현재 Helidon(Microprofile)과 Spring Boot으로 개발된 서비스가 이미지로 등록된 것을 확인할 수 있습니다.
     ![](images/oci-ocir-repository-1.png)
 
-### **STEP 9**: Oracle Kubernetes Engine (OKE) 에 배포된 Pod와 Service 확인
+### **STEP 9**: Oracle Kubernetes Engine (OKE) 에 생성(배포)된 Pod와 Service 확인하기
 * **Windows PowerShell**을 열고 다음과 같이 명령어를 실행합니다.
 
     ```
@@ -470,7 +484,7 @@ TO-DO 다운로드 할 수 있는 경로를 따로 지정해서 설치하도록 
 
 
 
-### **STEP 10**: 최종 배포된 서비스 확인
+### **STEP 10**: 서비스 확인하기
 * 브라우저를 열고 다음과 같이 확인한 External IP로 접속합니다.
     * Helidon(Microprofile) Movie 서비스 확인
         ```
