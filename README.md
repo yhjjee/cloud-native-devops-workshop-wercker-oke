@@ -69,8 +69,6 @@
 
     ![](images/windows-powershell.png)
 
-    [Image Source: https://itexplorer.tistory.com/40]
-
 * **Windows PowerShell**에서 다음과 같이 입력해서 C 드라이브에 실습을 위한 Git Repository를 가져옵니다.
     > #은 구분 표시로 입력하지 않습니다.
     ```
@@ -111,11 +109,11 @@
     * KUBERNETES VERSION: v1.12.7
     * QUICK CREATE: CHECK
     * SHAPE: VM.Standard2.1
-    * QUANTITY PER SUBNET: 1
+    * QUANTITY PER SUBNET: 2
 
     <img src="images/oci-create-oke-cluster-creation.png" width="50%">
 
-* 정상적으로 생성이 되면 생성된 노드의 상태가 ACTIVE가 됩니다.
+* 정상적으로 생성이 되면 생성된 노드의 상태가 ACTIVE가 됩니다. (대략 5~10분 소요)
   
   **생성 진행 과정**  
     ![](images/oci-oke-cluster-created.png)
@@ -123,7 +121,14 @@
   **ACTIVE 상태의 노드**  
     <img src="images/oci-created-oke-cluster.png" width="50%">
 
-### **STEP 3**: kubectl 와 oci-cli 설치하기
+### **STEP 3**: kubectl과 oci-cli 설치하기
+* kubectl 제공되는 Git Repository에서 Clone으로 다운로드 받은 c:\cloud-native-devops-workshop-wercker-oke 폴더안에도 같이 포함되어 있으므로 이 파일을 사용합니다.
+
+    > 선택사항) 참고로 kubectl 직접 설치를 하고 싶으면 아래 curl 명령어를 통해 설치 가능합니다. 다만, curl 명령어는 Windows Prompt (cmd)에서 실행 합니다. (PowerShell 에서는 옵션이 다름)
+    > ```
+    > curl -LO https://storage.googleapis.com/kubernetes-release/> release/v1.15.0/bin/windows/amd64/kubectl.exe
+    > ```
+
 * 클라이언트에서 OKE 접속을 위해서는 kubeconfig 파일을 생성해야 합니다. kubeconfig 파일을 얻는 과정은 OCI의 OKE Cluster 화면에서 Access **Kubeconfig** 버튼을 클릭하면 확인할 수 있습니다.
 
     **Access Kubeconfig 버튼** 
@@ -143,7 +148,7 @@
     # powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.ps1'))"
     ```
 
-* Python 설치가 완료되면 oci-cli 설치 경로를 설정합니다. 경로는 기본 경로(c:\Users\사용자명\)에 설치해도 되지만, Windows의 경우 사용자명에 공백이 있을 경우 설치가 되지 않습니다. 본 실습에서는 c:\oracle을 기본 경로로 합니다.
+* Python 설치가 완료되면 oci-cli 설치 경로를 설정합니다. 경로는 기본 경로(c:\Users\사용자명\)에 설치해도 되지만, Windows의 경우 사용자명에 공백이 있을 경우 설치가 되지 않습니다. 사용자명에 공백이 있을 경우에는 다음과 같이 c:\oracle 경로에 설치합니다.
     ```
     1. c:\oracle\oci-cli
     2. c:\oracle\bin
@@ -155,6 +160,7 @@
     ```
     # oci -v
     ```
+
 * oci-cli 설치가 완료되면 Oracle Cloud Infrastructure와 연결을 위한 설정을 합니다. 이 때 필요한 정보를 얻는 방법과 설정 방법은 다음과 같습니다.
     1. User OCID  
     User OCID는 OCI Console 우측 상단의 사용자 아이콘을 클릭한 후 아이디를 선택하면 확인할 수 있습니다.
@@ -168,23 +174,8 @@
     oci-cli 설치를 위해 필요하기 때문에 Tenancy OCID를 복사해서 메모합니다.
     ![](images/oci-get-tenancy-ocid-copy.png)
 
-    3. SSH Key Pair (Public/Private Key)
-    Oracle Cloud Infrastructure에 접속하기 위해서 기본적으로 SSH Key Pair가 필요합니다. macOS나 리눅스 환경에서는 ssh-keygen을 통해 생성하고 Windows 환경에서는 putty를 활용해서 생성합니다. 하지만, 여기서는 이미 생성된 SSH Key Pair를 사용합니다. GitHub에서 Clone한 파일 폴더의 keys 폴더내의 다음 파일을 복사해서 c:\Users\사용자이름\.oci 폴더로 붙여넣기 합니다. **PowerShell** 혹은 Windows탐색기를 사용합니다.
-
-        **Windows PowerShell을 사용하는 경우**
-        ```
-        # cd $HOME
-
-        # mkdir .oci
-
-        # cp c:\cloud-native-devops-workshop-wercker-oke\keys\* .oci
-        ```
-    
-    4. SSH Key 중에서 Public Key를 OCI API Key로 등록합니다. 아래와 같이 우측 상단의 사용자 아이콘 클릭 후 사용자 아이디를 클릭 합니다.
-    ![](images/oci-get-user-ocid.png)
-
-    좌측 **API Keys** 메뉴 선택 후 **Add Public Key** 버튼 클릭합니다. **PUBLIC KEY** 영역에 위에서 가져온 키 중에서 oci_api_key_public.pem 파일의 내용을 복사해서 붙여넣기 한 후 **Add** 버튼을 클릭합니다.
-    ![](images/oci-add-api-key.png)
+    3. Region
+    여기서는 서울 리전으로 지정합니다. (ap-seoul-1)
 
 * oci-cli 설정을 진행합니다. **Windows Powershell**에서 다음과 같이 입력합니다.
     ```
@@ -199,12 +190,16 @@
         * **앞에서 획득한 Tenancy OCID**
     * Enter a region
         * **ap-seoul-1**
-    * Do you want to generate a new RSA key pair?
-        * **n**
+    * Do you want to generate a new RSA key pair? (SSH Key Pair가 생성됨, 다음 단계에서 OCI에 Public 키를 등록해줌)
+        * **y**
     * Enter the location of your private key file:
         * **c:\Users\사용자이름\.oci\oci_api_key.pem**
 
-    > 마지막에 에러 메시지가 나올 수 있는데 무시합니다.
+* c:\Users\사용자이름\.oci 폴더와 config 파일, SSH Key Pair(.pem)가 생성됩니다. SSH Key 중에서 Public Key를 OCI API Key로 등록합니다. 아래와 같이 우측 상단의 사용자 아이콘 클릭 후 사용자 아이디를 클릭 합니다.
+    ![](images/oci-get-user-ocid.png)
+
+    좌측 **API Keys** 메뉴 선택 후 **Add Public Key** 버튼 클릭합니다. **PUBLIC KEY** 영역에 위에서 가져온 키 중에서 oci_api_key_public.pem 파일의 내용을 복사해서 붙여넣기 한 후 **Add** 버튼을 클릭합니다.
+    ![](images/oci-add-api-key.png)
 
 * kubeconfig를 생성합니다. 먼저 **Windows PowerShell**을 통해서 다음과 같이 실행해서 oracle 폴더 하위에 kube 폴더를 생성합니다.
     ```
@@ -222,7 +217,7 @@
     ```
     # cd $HOME\.kube
 
-    # dir
+    # type config
     ```
 
 ### **STEP 4**: GitHub Repository 생성
@@ -279,9 +274,15 @@
 
     ![](images/wercker-env.png)
 
-    여기서 입력해야 할 Key와 Value는 다음과 같습니다. 여기서 KUBERNETES_MASTER와 KUBERNETES_AUTH_TOKEN에 대한 정보는 $HOME/.kube/config 파일의 내용에서 가져올 것입니다.
-
+    여기서 필요한 Key와 Value는 다음과 같습니다. 
+    1. OCI_AUTH_TOKEN
+    2. DOCKER_REGISTRY
+    3. DOCKER_USERNAME
+    4. DOCKER_REPO
+    5. KUBERNETES_MASTER
+    6. KUBERNETES_AUTH_TOKEN
     
+    여기서 KUBERNETES_MASTER와 KUBERNETES_AUTH_TOKEN에 대한 정보는 $HOME/.kube/config 파일의 내용에서 가져올 것입니다.
 
     * OCI_AUTH_TOKEN
         * OCI Console 우측 상단의 사용자 아이디를 클릭 후 좌측 **Auth Tokens**를 선택한 후 **Generate Token**을 클릭합니다.
@@ -291,7 +292,6 @@
 
         ![](images/oci-generate-token-copy.png)
         
-
         생성된 토큰을 복사한 후 Wercker에 다음과 같이 입력하고 Add 버튼을 클릭합니다.
 
         **Key:** OCI_AUTH_TOKEN  
@@ -309,18 +309,16 @@
         * Docker Username은 OCI 사용자 아이디입니다. OCI Console 우측 상단의 사람 아이콘을 클릭해서 확인할 수 있습니다. 여기에 Tenancy명이 필요합니다. 보통 이름은 다음과 같이 구성됩니다.
 
         **Key:** DOCKER_USERNAME  
-        **Value:** {Tenancy명}/oracleidentitycloudservice/이메일 계정 (예. apackrsct01/oracleidentitycloudservice/donghu.kim@oracle.com)
+        **Value:** {Tenancy명}/oracleidentitycloudservice/이메일 계정 (예. busanbank1/oracleidentitycloudservice/donghu.kim@oracle.com)
 
     * DOCKER_REPO
         * Docker Repository이름으로 Tenancy명 + {레파지토리명}입니다. 레파지토리 이름은 임의 지정합니다.
 
         **Key:** DOCKER_REPO  
-        **Value:** {Tenancy명}/{레파지토리 명} (예. apackrsct01/oracle-devops-workshop)
-        
-        {Tenancy명}/helidon-movie-api-mp
+        **Value:** {Tenancy명}/{레파지토리 명} (예. busanbank1/oracle-devops-workshop)
 
     * KUBERNETES_MASTER와 KUBERNETES_AUTH_TOKEN는 .kube/config 파일에서 얻을 수 있습니다. 해당 파일을 편집기로 열어서 MASTER와 TOKEN을 복사해서 입력합니다.
-    
+
         ![](images/oci-oke-kubeconfig.png)
   
         **Key:** KUBERNETES_MASTER 
@@ -329,8 +327,18 @@
         **Key:** KUBERNETES_AUTH_TOKEN 
         **Value:**: KUBERNETES AUTH TOKEN (예. LS0tLS1CRUdJTiBDRVJUSU................)
 
+* Wercker Application 환경 설정을 완료한 모습입니다.
+    ![](images/wercker-env-completed.png)
 
 ### **STEP 6**: Wercker와 Kubernetes 설정 파일 구성하기 (옵션: Blue/Green Deployment)
+* 로컬에 다운로드 받은 Git Repository 폴더 (c:\cloud-native-devops-workshop-wercker-oke)에 작성된 설정 파일을 사용합니다. 설정 파일은 다음과 같습니다.
+    * wercker.yml
+        * Wercker CI/CD의 Pipeline을 구성을 위한 설정 파일
+    * kube-helidon-movie-api-mp-config.yml.template
+        * helidon-movie-api-mp 서비스를 Kubernetes 환경에 배포하기 위한 설정 파일
+    * kube-springboot-movie-people-api-config.yml.template
+        * springboot-movie-people-api 서비스를 Kubernetes 환경에 배포하기 위한 설정 파일
+
 
 ### **STEP 6**: Wercker CI/CD Pipeline 구성하기
 
