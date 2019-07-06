@@ -18,16 +18,16 @@
 ## Steps
 본 실습은 총 10단계로 구성되어 있습니다.
 
-1. **STEP 1**: Setup
-2. **STEP 2**: OCI에서 Kubernetes Cluster 생성하기
-3. **STEP 3**: kubectl과 oci-cli 설치하기
-4. **STEP 4**: GitHub Repository 생성하기
-5. **STEP 5**: Wercker 환경 구성하기
-6. **STEP 6**: Wercker CI/CD Pipeline 구성하기
-7. **STEP 7**: Wercker 파이프라인 실행하기
-8. **STEP 8**: Oracle Container Registry (OCIR) 확인
-9. **STEP 9**: Oracle Kubernetes Engine (OKE) 에 생성(배포)된 Pod와 Service 확인하기
-10. **STEP 10**: 서비스 확인하기
+**STEP 1**: Setup  
+**STEP 2**: OCI에서 Kubernetes Cluster 생성하기  
+**STEP 3**: kubectl과 oci-cli 설치하기  
+**STEP 4**: GitHub Repository 생성하기  
+**STEP 5**: Wercker 환경 구성하기  
+**STEP 6**: Wercker CI/CD Pipeline 구성하기  
+**STEP 7**: Wercker 파이프라인 실행하기  
+**STEP 8**: Oracle Container Registry (OCIR) 확인  
+**STEP 9**: Oracle Kubernetes Engine (OKE) 에 생성(배포)된 Pod와 Service 확인하기  
+**STEP 10**: 서비스 확인하기
 
 ***
 
