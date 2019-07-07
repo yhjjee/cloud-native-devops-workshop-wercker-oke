@@ -16,6 +16,7 @@
 
 package io.helidon.api.movie;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -23,7 +24,7 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 import io.helidon.api.movie.controller.MovieController;
-import io.helidon.common.CollectionsHelper;
+import io.helidon.api.movie.filter.CORSFilter;
 
 /**
  * Simple Application that produces a greeting message.
@@ -34,6 +35,11 @@ public class MovieApplication extends Application {
 
     @Override
     public Set<Class<?>> getClasses() {
-        return CollectionsHelper.setOf(MovieController.class);
+        final Set<Class<?>> resources = new HashSet();
+
+        resources.add(MovieController.class);
+        resources.add(CORSFilter.class);
+        
+        return resources;
     }
 }
