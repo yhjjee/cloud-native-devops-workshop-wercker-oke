@@ -511,3 +511,5 @@ TO-DO 다운로드 할 수 있는 경로를 따로 지정해서 설치하도록 
         ```
         http://{External_IP}:31000/moviepeople
         ```
+
+
