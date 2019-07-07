@@ -380,6 +380,14 @@ TO-DO 다운로드 할 수 있는 경로를 따로 지정해서 설치하도록 
       steps:
         - internal/springboot-docker-push:
             .... spring-boot 서비스 컨테이너 이미지 생성, 이미지 푸시
+    push-release-3:
+      steps:
+        - script:
+            .... 
+        - internal/docker-build:
+            .... 2개의 서비스를 사용하는 프론트엔드 애플리케이션 컨테이너 이미지 생성, 이미지 푸시
+        - internal/docker-push:
+            .... 이미지 푸시
 
     # deploy-to-cluster 파이프라인 입니다. 두 개의 서비스에 대한 Pod를 Kubernetes 노드에 생성하고 서비스로 노출합니다.
     deploy-to-cluster:
@@ -413,6 +421,13 @@ TO-DO 다운로드 할 수 있는 경로를 따로 지정해서 설치하도록 
       - kubectl:
           name: deploy springboot-movie-people-api to kubernetes
           ... springboot-movie-people-api 서비스 Pod 생성
+      - script:
+          name: "Visualise Kubernetes config"
+          code: cat kube-jet-movie-msa-ui-config.yml
+
+      - kubectl:
+          name: deploy jet-movie-msa-ui to kubernetes
+          ... jet-movie-msa-ui 서비스 Pod 생성
     ```
 
 * 위 wercker.yml에는 다음과 같이 4개의 파이프라인을 임의로 지정했습니다. 
@@ -437,7 +452,11 @@ TO-DO 다운로드 할 수 있는 경로를 따로 지정해서 설치하도록 
 
     ![](images/wercker-create-pipeline-push-2.png)
 
-* 상단 **Workflows**탭을 클릭 후 동일하게 네 번째 파이프라인인 **deploy-to-cluster**를 입력하고 **Create**버튼을 클릭합니다.
+* 동일하게 네 번째 파이프라인인 **push-release-3**를 입력하고 **Create**버튼을 클릭합니다.
+
+    ![](images/wercker-create-pipeline-push-3.png)
+
+* 동일하게 다섯 번째 파이프라인인 **deploy-to-cluster**를 입력하고 **Create**버튼을 클릭합니다.
 
     ![](images/wercker-create-pipeline-2.png)
 
@@ -461,9 +480,17 @@ TO-DO 다운로드 할 수 있는 경로를 따로 지정해서 설치하도록 
 
     ![](images/wercker-workflow-add-4.png)
 
-* **deploy-to-cluster** 선택 후 **Add**버튼을 클릭 합니다.
+* **push-release-3** 선택 후 **Add**버튼을 클릭 합니다.
 
     ![](images/wercker-workflow-add-5.png)
+
+* **push-release-3** 파이프라인 옆 **+** 아이콘을 클릭 합니다.
+
+    ![](images/wercker-workflow-add-6.png)
+
+* **deploy-to-cluster** 선택 후 **Add**버튼을 클릭 합니다.
+
+    ![](images/wercker-workflow-add-7.png)
 
 * 완성된 Wercker Workflow 모습입니다.
     ![](images/wercker-workflow-complete.png)
@@ -511,5 +538,15 @@ TO-DO 다운로드 할 수 있는 경로를 따로 지정해서 설치하도록 
         ```
         http://{External_IP}:31000/moviepeople
         ```
+    * Movie Web Page
+        ```
+        http://{External_IP}
+        ```
 
 
+
+        추가해야 할 내용들..
+        1. MS Powershell 화면 캡쳐
+        2. JET 관련 부분 GitHub 이미지 확인
+        3. Wercker Pipeline에 jet 관련된 부분 추가 (push-release-3)
+        4. JET에 MoviePeople 추가할 지...
