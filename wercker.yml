@@ -22,7 +22,14 @@ build:
         cwd: springboot-movie-people-api
         code: mvn clean package 
     - npm-install
-        
+
+build-jet-ui:
+  steps:
+    - internal/docker-build:
+        context: jet-movie-msa-ui
+        dockerfile: Dockerfile 
+        image-name: jet-movie-msa-ui
+
 #Push the docker image with our built and tested application to the Oracle Container Registry
 push-release-1:
   steps:
