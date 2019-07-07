@@ -55,6 +55,23 @@ push-release-2:
         ports: 8000
         cmd: java -jar target/springboot-movie-people-api-1.0.jar
 
+push-release-3:
+  steps:
+    - script:
+        name: pwd
+        code: pwd
+    - internal/docker-build:
+        context: jet-movie-msa-ui
+        dockerfile: Dockerfile 
+        image-name: jet-movie-msa-ui
+    - internal/docker-push:
+        image-name: jet-movie-msa-ui
+        username: $DOCKER_USERNAME
+        password: $OCI_AUTH_TOKEN
+        repository: $DOCKER_REGISTRY/$DOCKER_REPO
+        registry: https://$DOCKER_REGISTRY/v2
+        tag: $WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT-jet-movie-msa-ui
+
 #Deploy our container from the Oracle Container Registry to the Oracle Container Engine (Kubernetes)
 deploy-to-cluster:
   box:
@@ -99,3 +116,14 @@ deploy-to-cluster:
         token: $KUBERNETES_AUTH_TOKEN
         insecure-skip-tls-verify: true
         command: apply -f kube-springboot-movie-people-api-config.yml
+
+    - script:
+        name: "Visualise Kubernetes config"
+        code: cat kube-jet-movie-msa-ui-config.yml
+
+    - kubectl:
+        name: deploy jet-movie-msa-ui to kubernetes
+        server: $KUBERNETES_MASTER
+        token: $KUBERNETES_AUTH_TOKEN
+        insecure-skip-tls-verify: true
+        command: apply -f kube-jet-movie-msa-ui-config.yml
