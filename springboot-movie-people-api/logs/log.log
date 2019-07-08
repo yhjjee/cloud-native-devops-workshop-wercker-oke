@@ -1,103 +1,120 @@
-07-07-2019 00:35:58.209 [Thread-93] INFO  o.s.s.c.ThreadPoolTaskExecutor.shutdown - Shutting down ExecutorService 'applicationTaskExecutor'
-07-07-2019 00:35:58.212 [Thread-93] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.destroy - Closing JPA EntityManagerFactory for persistence unit 'default'
-07-07-2019 00:35:58.227 [Thread-93] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-10 - Shutdown initiated...
-07-07-2019 00:35:58.360 [Thread-93] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-10 - Shutdown completed.
-07-07-2019 00:35:58.737 [restartedMain] INFO  c.e.moviepeople.DemoApplication.logStarting - Starting DemoApplication on MacBook-Pro.local with PID 4693 (/Users/DonghuKim/Programming/Code/cloud-native-devops-workshop-wercker-oke/springboot-movie-people-api/target/classes started by DonghuKim in /Users/DonghuKim/Programming/Code/cloud-native-devops-workshop-wercker-oke/springboot-movie-people-api)
-07-07-2019 00:35:58.738 [restartedMain] INFO  c.e.moviepeople.DemoApplication.logStartupProfileInfo - The following profiles are active: oracle
-07-07-2019 00:35:58.969 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Bootstrapping Spring Data repositories in DEFAULT mode.
-07-07-2019 00:35:58.980 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Finished Spring Data repository scanning in 10ms. Found 1 repository interfaces.
-07-07-2019 00:35:59.060 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$b7508e3a] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-07-07-2019 00:35:59.113 [main] INFO  c.e.moviepeople.DemoApplicationTests.logStarting - Starting DemoApplicationTests on MacBook-Pro.local with PID 53934 (started by DonghuKim in /Users/DonghuKim/Programming/Code/cloud-native-devops-workshop-wercker-oke/springboot-movie-people-api)
-07-07-2019 00:35:59.114 [main] INFO  c.e.moviepeople.DemoApplicationTests.logStartupProfileInfo - The following profiles are active: oracle
-07-07-2019 00:35:59.133 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer.initialize - Tomcat initialized with port(s): 8000 (http)
-07-07-2019 00:35:59.135 [restartedMain] INFO  o.a.catalina.core.StandardService.log - Starting service [Tomcat]
-07-07-2019 00:35:59.135 [restartedMain] INFO  o.a.catalina.core.StandardEngine.log - Starting Servlet engine: [Apache Tomcat/9.0.21]
-07-07-2019 00:35:59.144 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/].log - Initializing Spring embedded WebApplicationContext
-07-07-2019 00:35:59.145 [restartedMain] INFO  o.s.web.context.ContextLoader.prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 403 ms
-07-07-2019 00:35:59.189 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-11 - Starting...
-07-07-2019 00:35:59.296 [restartedMain] INFO  com.zaxxer.hikari.pool.PoolBase.getAndSetNetworkTimeout - HikariPool-11 - Driver does not support get/set network timeout for connections. (oracle.jdbc.driver.T4CConnection.getNetworkTimeout()I)
-07-07-2019 00:35:59.300 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-11 - Start completed.
-07-07-2019 00:35:59.306 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper.logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [
+09-07-2019 02:01:15.952 [restartedMain] INFO  c.e.moviepeople.DemoApplication.logStarting - Starting DemoApplication on MacBook-Pro.local with PID 12157 (/Users/DonghuKim/Programming/Code/cloud-native-devops-workshop-wercker-oke/springboot-movie-people-api/target/classes started by DonghuKim in /Users/DonghuKim/Programming/Code/cloud-native-devops-workshop-wercker-oke/springboot-movie-people-api)
+09-07-2019 02:01:15.960 [restartedMain] INFO  c.e.moviepeople.DemoApplication.logStartupProfileInfo - The following profiles are active: oracle
+09-07-2019 02:01:16.009 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor.logTo - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+09-07-2019 02:01:16.009 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor.logTo - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+09-07-2019 02:01:16.713 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Bootstrapping Spring Data repositories in DEFAULT mode.
+09-07-2019 02:01:16.786 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Finished Spring Data repository scanning in 63ms. Found 1 repository interfaces.
+09-07-2019 02:01:17.134 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$3c9fc758] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09-07-2019 02:01:17.487 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer.initialize - Tomcat initialized with port(s): 8000 (http)
+09-07-2019 02:01:17.516 [restartedMain] INFO  o.a.catalina.core.StandardService.log - Starting service [Tomcat]
+09-07-2019 02:01:17.516 [restartedMain] INFO  o.a.catalina.core.StandardEngine.log - Starting Servlet engine: [Apache Tomcat/9.0.21]
+09-07-2019 02:01:17.614 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/].log - Initializing Spring embedded WebApplicationContext
+09-07-2019 02:01:17.614 [restartedMain] INFO  o.s.web.context.ContextLoader.prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 1605 ms
+09-07-2019 02:01:17.851 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-1 - Starting...
+09-07-2019 02:01:18.194 [restartedMain] INFO  com.zaxxer.hikari.pool.PoolBase.getAndSetNetworkTimeout - HikariPool-1 - Driver does not support get/set network timeout for connections. (oracle.jdbc.driver.T4CConnection.getNetworkTimeout()I)
+09-07-2019 02:01:18.202 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-1 - Start completed.
+09-07-2019 02:01:18.253 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper.logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [
 	name: default
 	...]
-07-07-2019 00:35:59.313 [restartedMain] INFO  org.hibernate.dialect.Dialect.<init> - HHH000400: Using dialect: org.hibernate.dialect.Oracle10gDialect
-07-07-2019 00:35:59.951 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Bootstrapping Spring Data repositories in DEFAULT mode.
-07-07-2019 00:36:00.045 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Finished Spring Data repository scanning in 80ms. Found 1 repository interfaces.
-07-07-2019 00:36:00.307 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
-07-07-2019 00:36:00.317 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer.startServer - LiveReload server is running on port 35729
-07-07-2019 00:36:00.454 [restartedMain] INFO  o.s.s.c.ThreadPoolTaskExecutor.initialize - Initializing ExecutorService 'applicationTaskExecutor'
-07-07-2019 00:36:00.461 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration.openEntityManagerInViewInterceptor - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-07-07-2019 00:36:00.567 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer.start - Tomcat started on port(s): 8000 (http) with context path ''
-07-07-2019 00:36:00.566 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$86318451] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-07-07-2019 00:36:00.567 [restartedMain] INFO  c.e.moviepeople.DemoApplication.logStarted - Started DemoApplication in 1.86 seconds (JVM running for 27499.887)
-07-07-2019 00:36:00.569 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener.onApplicationEvent - Condition evaluation unchanged
-07-07-2019 00:36:00.947 [main] INFO  com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-1 - Starting...
-07-07-2019 00:36:01.349 [main] INFO  com.zaxxer.hikari.pool.PoolBase.getAndSetNetworkTimeout - HikariPool-1 - Driver does not support get/set network timeout for connections. (Receiver class oracle.jdbc.driver.T4CConnection does not define or inherit an implementation of the resolved method abstract getNetworkTimeout()I of interface java.sql.Connection.)
-07-07-2019 00:36:01.371 [main] INFO  com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-1 - Start completed.
-07-07-2019 00:36:01.473 [main] INFO  o.h.jpa.internal.util.LogHelper.logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [
+09-07-2019 02:01:18.340 [restartedMain] INFO  org.hibernate.Version.logVersion - HHH000412: Hibernate Core {5.3.10.Final}
+09-07-2019 02:01:18.342 [restartedMain] INFO  org.hibernate.cfg.Environment.<clinit> - HHH000206: hibernate.properties not found
+09-07-2019 02:01:18.521 [restartedMain] INFO  o.h.annotations.common.Version.<clinit> - HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+09-07-2019 02:01:18.692 [restartedMain] INFO  org.hibernate.dialect.Dialect.<init> - HHH000400: Using dialect: org.hibernate.dialect.Oracle10gDialect
+09-07-2019 02:01:21.574 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
+09-07-2019 02:01:21.592 [restartedMain] WARN  o.s.b.d.a.OptionalLiveReloadServer.startServer - Unable to start LiveReload server
+09-07-2019 02:01:22.089 [restartedMain] INFO  o.s.s.c.ThreadPoolTaskExecutor.initialize - Initializing ExecutorService 'applicationTaskExecutor'
+09-07-2019 02:01:22.137 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration.openEntityManagerInViewInterceptor - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+09-07-2019 02:01:22.503 [restartedMain] ERROR o.apache.catalina.util.LifecycleBase.log - Failed to start component [Connector[HTTP/1.1-8000]]
+org.apache.catalina.LifecycleException: Protocol handler start failed
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1008)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:227)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:263)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:195)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.startWebServer(ServletWebServerApplicationContext.java:296)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.finishRefresh(ServletWebServerApplicationContext.java:162)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:552)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:140)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:742)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:389)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1213)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1202)
+	at com.example.moviepeople.DemoApplication.main(DemoApplication.java:10)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Net.java:433)
+	at sun.nio.ch.Net.bind(Net.java:425)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74)
+	at org.apache.tomcat.util.net.NioEndpoint.initServerSocket(NioEndpoint.java:230)
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:213)
+	at org.apache.tomcat.util.net.AbstractEndpoint.bindWithCleanup(AbstractEndpoint.java:1124)
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1210)
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:585)
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1005)
+	... 19 common frames omitted
+09-07-2019 02:01:22.507 [restartedMain] INFO  o.a.catalina.core.StandardService.log - Stopping service [Tomcat]
+09-07-2019 02:01:22.515 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener.logMessage - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+09-07-2019 02:01:22.516 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter.report - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The Tomcat connector configured to listen on port 8000 failed to start. The port may already be in use or the connector may be misconfigured.
+
+Action:
+
+Verify the connector's configuration, identify and stop any process that's listening on port 8000, or configure this application to listen on another port.
+
+09-07-2019 02:01:22.519 [restartedMain] INFO  o.s.s.c.ThreadPoolTaskExecutor.shutdown - Shutting down ExecutorService 'applicationTaskExecutor'
+09-07-2019 02:01:22.520 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.destroy - Closing JPA EntityManagerFactory for persistence unit 'default'
+09-07-2019 02:01:22.523 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-1 - Shutdown initiated...
+09-07-2019 02:01:22.610 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-1 - Shutdown completed.
+09-07-2019 02:02:53.494 [restartedMain] INFO  c.e.moviepeople.DemoApplication.logStarting - Starting DemoApplication on MacBook-Pro.local with PID 12451 (/Users/DonghuKim/Programming/Code/cloud-native-devops-workshop-wercker-oke/springboot-movie-people-api/target/classes started by DonghuKim in /Users/DonghuKim/Programming/Code/cloud-native-devops-workshop-wercker-oke/springboot-movie-people-api)
+09-07-2019 02:02:53.497 [restartedMain] INFO  c.e.moviepeople.DemoApplication.logStartupProfileInfo - The following profiles are active: oracle
+09-07-2019 02:02:53.539 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor.logTo - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+09-07-2019 02:02:53.540 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor.logTo - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+09-07-2019 02:02:54.145 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Bootstrapping Spring Data repositories in DEFAULT mode.
+09-07-2019 02:02:54.211 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Finished Spring Data repository scanning in 57ms. Found 1 repository interfaces.
+09-07-2019 02:02:54.552 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$b1a93f80] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09-07-2019 02:02:54.846 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer.initialize - Tomcat initialized with port(s): 8081 (http)
+09-07-2019 02:02:54.872 [restartedMain] INFO  o.a.catalina.core.StandardService.log - Starting service [Tomcat]
+09-07-2019 02:02:54.872 [restartedMain] INFO  o.a.catalina.core.StandardEngine.log - Starting Servlet engine: [Apache Tomcat/9.0.21]
+09-07-2019 02:02:54.956 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/].log - Initializing Spring embedded WebApplicationContext
+09-07-2019 02:02:54.956 [restartedMain] INFO  o.s.web.context.ContextLoader.prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 1416 ms
+09-07-2019 02:02:55.176 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-1 - Starting...
+09-07-2019 02:02:55.455 [restartedMain] INFO  com.zaxxer.hikari.pool.PoolBase.getAndSetNetworkTimeout - HikariPool-1 - Driver does not support get/set network timeout for connections. (oracle.jdbc.driver.T4CConnection.getNetworkTimeout()I)
+09-07-2019 02:02:55.490 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-1 - Start completed.
+09-07-2019 02:02:55.534 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper.logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [
 	name: default
 	...]
-07-07-2019 00:36:01.596 [main] INFO  org.hibernate.Version.logVersion - HHH000412: Hibernate Core {5.3.10.Final}
-07-07-2019 00:36:01.598 [main] INFO  org.hibernate.cfg.Environment.<clinit> - HHH000206: hibernate.properties not found
-07-07-2019 00:36:01.826 [main] INFO  o.h.annotations.common.Version.<clinit> - HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
-07-07-2019 00:36:02.013 [main] INFO  org.hibernate.dialect.Dialect.<init> - HHH000400: Using dialect: org.hibernate.dialect.Oracle10gDialect
-07-07-2019 00:36:03.676 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
-07-07-2019 00:36:04.564 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor.initialize - Initializing ExecutorService 'applicationTaskExecutor'
-07-07-2019 00:36:04.617 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration.openEntityManagerInViewInterceptor - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-07-07-2019 00:36:04.922 [main] INFO  c.e.moviepeople.DemoApplicationTests.logStarted - Started DemoApplicationTests in 6.3 seconds (JVM running for 7.177)
-07-07-2019 00:36:05.165 [main] INFO  o.h.h.i.QueryTranslatorFactoryInitiator.initiateService - HHH000397: Using ASTQueryTranslatorFactory
-07-07-2019 00:36:05.394 [Thread-6] INFO  o.s.s.c.ThreadPoolTaskExecutor.shutdown - Shutting down ExecutorService 'applicationTaskExecutor'
-07-07-2019 00:36:05.396 [Thread-6] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.destroy - Closing JPA EntityManagerFactory for persistence unit 'default'
-07-07-2019 00:36:05.405 [Thread-6] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-1 - Shutdown initiated...
-07-07-2019 00:36:05.511 [Thread-6] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-1 - Shutdown completed.
-07-07-2019 00:36:46.694 [http-nio-8000-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/].log - Initializing Spring DispatcherServlet 'dispatcherServlet'
-07-07-2019 00:36:46.696 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet.initServletBean - Initializing Servlet 'dispatcherServlet'
-07-07-2019 00:36:46.702 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet.initServletBean - Completed initialization in 5 ms
-07-07-2019 00:55:16.922 [main] INFO  c.e.moviepeople.DemoApplicationTests.logStarting - Starting DemoApplicationTests on MacBook-Pro.local with PID 56571 (started by DonghuKim in /Users/DonghuKim/Programming/Code/cloud-native-devops-workshop-wercker-oke/springboot-movie-people-api)
-07-07-2019 00:55:16.923 [main] INFO  c.e.moviepeople.DemoApplicationTests.logStartupProfileInfo - The following profiles are active: oracle
-07-07-2019 00:55:17.559 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Bootstrapping Spring Data repositories in DEFAULT mode.
-07-07-2019 00:55:17.623 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Finished Spring Data repository scanning in 55ms. Found 1 repository interfaces.
-07-07-2019 00:55:18.005 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$2765b9ec] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-07-07-2019 00:55:18.268 [main] INFO  com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-1 - Starting...
-07-07-2019 00:55:18.580 [main] INFO  com.zaxxer.hikari.pool.PoolBase.getAndSetNetworkTimeout - HikariPool-1 - Driver does not support get/set network timeout for connections. (Receiver class oracle.jdbc.driver.T4CConnection does not define or inherit an implementation of the resolved method abstract getNetworkTimeout()I of interface java.sql.Connection.)
-07-07-2019 00:55:18.588 [main] INFO  com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-1 - Start completed.
-07-07-2019 00:55:18.654 [main] INFO  o.h.jpa.internal.util.LogHelper.logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [
-	name: default
-	...]
-07-07-2019 00:55:18.722 [main] INFO  org.hibernate.Version.logVersion - HHH000412: Hibernate Core {5.3.10.Final}
-07-07-2019 00:55:18.723 [main] INFO  org.hibernate.cfg.Environment.<clinit> - HHH000206: hibernate.properties not found
-07-07-2019 00:55:18.869 [main] INFO  o.h.annotations.common.Version.<clinit> - HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
-07-07-2019 00:55:19.004 [main] INFO  org.hibernate.dialect.Dialect.<init> - HHH000400: Using dialect: org.hibernate.dialect.Oracle10gDialect
-07-07-2019 00:55:20.872 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
-07-07-2019 00:55:21.666 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor.initialize - Initializing ExecutorService 'applicationTaskExecutor'
-07-07-2019 00:55:21.711 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration.openEntityManagerInViewInterceptor - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-07-07-2019 00:55:21.993 [main] INFO  c.e.moviepeople.DemoApplicationTests.logStarted - Started DemoApplicationTests in 5.343 seconds (JVM running for 6.005)
-07-07-2019 00:55:22.218 [main] INFO  o.h.h.i.QueryTranslatorFactoryInitiator.initiateService - HHH000397: Using ASTQueryTranslatorFactory
-07-07-2019 00:55:22.388 [Thread-5] INFO  o.s.s.c.ThreadPoolTaskExecutor.shutdown - Shutting down ExecutorService 'applicationTaskExecutor'
-07-07-2019 00:55:22.390 [Thread-5] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.destroy - Closing JPA EntityManagerFactory for persistence unit 'default'
-07-07-2019 00:55:22.396 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-1 - Shutdown initiated...
-07-07-2019 00:55:22.486 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-1 - Shutdown completed.
-07-07-2019 00:56:01.106 [main] INFO  c.e.moviepeople.DemoApplicationTests.logStarting - Starting DemoApplicationTests on MacBook-Pro.local with PID 56804 (started by DonghuKim in /Users/DonghuKim/Programming/Code/cloud-native-devops-workshop-wercker-oke/springboot-movie-people-api)
-07-07-2019 00:56:01.107 [main] INFO  c.e.moviepeople.DemoApplicationTests.logStartupProfileInfo - The following profiles are active: oracle
-07-07-2019 00:56:01.757 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Bootstrapping Spring Data repositories in DEFAULT mode.
-07-07-2019 00:56:01.821 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Finished Spring Data repository scanning in 56ms. Found 1 repository interfaces.
-07-07-2019 00:56:02.193 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$f4fb719c] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-07-07-2019 00:56:02.450 [main] INFO  com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-1 - Starting...
-07-07-2019 00:56:02.731 [main] INFO  com.zaxxer.hikari.pool.PoolBase.getAndSetNetworkTimeout - HikariPool-1 - Driver does not support get/set network timeout for connections. (Receiver class oracle.jdbc.driver.T4CConnection does not define or inherit an implementation of the resolved method abstract getNetworkTimeout()I of interface java.sql.Connection.)
-07-07-2019 00:56:02.743 [main] INFO  com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-1 - Start completed.
-07-07-2019 00:56:02.809 [main] INFO  o.h.jpa.internal.util.LogHelper.logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [
-	name: default
-	...]
-07-07-2019 00:56:02.885 [main] INFO  org.hibernate.Version.logVersion - HHH000412: Hibernate Core {5.3.10.Final}
-07-07-2019 00:56:02.887 [main] INFO  org.hibernate.cfg.Environment.<clinit> - HHH000206: hibernate.properties not found
-07-07-2019 00:56:03.028 [main] INFO  o.h.annotations.common.Version.<clinit> - HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
-07-07-2019 00:56:03.152 [main] INFO  org.hibernate.dialect.Dialect.<init> - HHH000400: Using dialect: org.hibernate.dialect.Oracle10gDialect
-07-07-2019 00:56:04.369 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
-07-07-2019 00:56:05.143 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor.initialize - Initializing ExecutorService 'applicationTaskExecutor'
-07-07-2019 00:56:05.188 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration.openEntityManagerInViewInterceptor - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-07-07-2019 00:56:05.477 [main] INFO  c.e.moviepeople.DemoApplicationTests.logStarted - Started DemoApplicationTests in 4.653 seconds (JVM running for 5.321)
-07-07-2019 00:56:05.677 [main] INFO  o.h.h.i.QueryTranslatorFactoryInitiator.initiateService - HHH000397: Using ASTQueryTranslatorFactory
-07-07-2019 00:56:05.875 [Thread-5] INFO  o.s.s.c.ThreadPoolTaskExecutor.shutdown - Shutting down ExecutorService 'applicationTaskExecutor'
-07-07-2019 00:56:05.878 [Thread-5] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.destroy - Closing JPA EntityManagerFactory for persistence unit 'default'
-07-07-2019 00:56:05.884 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-1 - Shutdown initiated...
-07-07-2019 00:56:05.956 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-1 - Shutdown completed.
+09-07-2019 02:02:55.598 [restartedMain] INFO  org.hibernate.Version.logVersion - HHH000412: Hibernate Core {5.3.10.Final}
+09-07-2019 02:02:55.599 [restartedMain] INFO  org.hibernate.cfg.Environment.<clinit> - HHH000206: hibernate.properties not found
+09-07-2019 02:02:55.718 [restartedMain] INFO  o.h.annotations.common.Version.<clinit> - HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+09-07-2019 02:02:55.844 [restartedMain] INFO  org.hibernate.dialect.Dialect.<init> - HHH000400: Using dialect: org.hibernate.dialect.Oracle10gDialect
+09-07-2019 02:02:57.119 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
+09-07-2019 02:02:57.138 [restartedMain] WARN  o.s.b.d.a.OptionalLiveReloadServer.startServer - Unable to start LiveReload server
+09-07-2019 02:02:57.603 [restartedMain] INFO  o.s.s.c.ThreadPoolTaskExecutor.initialize - Initializing ExecutorService 'applicationTaskExecutor'
+09-07-2019 02:02:57.647 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration.openEntityManagerInViewInterceptor - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+09-07-2019 02:02:57.997 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer.start - Tomcat started on port(s): 8081 (http) with context path ''
+09-07-2019 02:02:58.000 [restartedMain] INFO  c.e.moviepeople.DemoApplication.logStarted - Started DemoApplication in 4.837 seconds (JVM running for 5.213)
+09-07-2019 02:03:16.322 [http-nio-8081-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/].log - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09-07-2019 02:03:16.322 [http-nio-8081-exec-1] INFO  o.s.web.servlet.DispatcherServlet.initServletBean - Initializing Servlet 'dispatcherServlet'
+09-07-2019 02:03:16.333 [http-nio-8081-exec-1] INFO  o.s.web.servlet.DispatcherServlet.initServletBean - Completed initialization in 10 ms
+09-07-2019 02:03:16.397 [http-nio-8081-exec-1] INFO  o.h.h.i.QueryTranslatorFactoryInitiator.initiateService - HHH000397: Using ASTQueryTranslatorFactory
+09-07-2019 02:04:00.103 [http-nio-8081-exec-4] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver.logException - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: "filmography"]
+09-07-2019 02:39:08.133 [Thread-10] INFO  o.s.s.c.ThreadPoolTaskExecutor.shutdown - Shutting down ExecutorService 'applicationTaskExecutor'
+09-07-2019 02:39:08.134 [Thread-10] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.destroy - Closing JPA EntityManagerFactory for persistence unit 'default'
+09-07-2019 02:39:08.138 [Thread-10] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-1 - Shutdown initiated...
+09-07-2019 02:39:08.238 [Thread-10] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-1 - Shutdown completed.

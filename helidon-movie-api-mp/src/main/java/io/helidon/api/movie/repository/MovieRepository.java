@@ -47,8 +47,10 @@ public class MovieRepository {
         queryBuffer.append("SELECT ID, TITLE, POSTER_PATH, VOTE_COUNT, VOTE_AVERAGE, RELEASE_DATE FROM MOVIE WHERE  ROWNUM <= 50 " + clause + " ORDER BY ID DESC");
 
         System.out.println(queryBuffer.toString());
+
+        Connection conn = null;
         try {
-            Connection conn = this.dataSource.getConnection();
+            conn = this.dataSource.getConnection();
             
             PreparedStatement ps = conn.prepareStatement(queryBuffer.toString());
 
@@ -70,6 +72,13 @@ public class MovieRepository {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
 
         return movieArray;
@@ -78,8 +87,9 @@ public class MovieRepository {
     public Movie findMovieByid(int id) {
         Movie movie = new Movie();
 
+        Connection conn = null;
         try {
-            Connection conn = this.dataSource.getConnection();
+            conn = this.dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM MOVIE WHERE ID = ?");
 
             ps.setInt(1, id);
@@ -97,6 +107,13 @@ public class MovieRepository {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
 
         return movie;

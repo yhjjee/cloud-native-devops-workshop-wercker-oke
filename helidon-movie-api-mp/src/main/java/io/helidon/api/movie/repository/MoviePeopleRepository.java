@@ -45,8 +45,9 @@ public class MoviePeopleRepository {
         StringBuffer queryBuffer = new StringBuffer();
         queryBuffer.append("SELECT * FROM MOVIE_PEOPLE " + clause + " ORDER BY ID DESC");
         
+        Connection conn = null;
         try {
-            Connection conn = this.dataSource.getConnection();
+            conn = this.dataSource.getConnection();
             
             PreparedStatement ps = conn.prepareStatement(queryBuffer.toString());
 
@@ -65,8 +66,17 @@ public class MoviePeopleRepository {
                 moviePeopleArray.add(moviePeople);
             }
 
+            conn.close();
+            
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
 
         return moviePeopleArray;

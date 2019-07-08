@@ -76,7 +76,7 @@
 * 아래 URL을 통해서 Seoul Region으로 접속합니다.
     > 참고) tenancy 명은 처음 Oracle Cloud Subscription 시에 지정합니다.
 
-    * https://console.ap-seoul-1.oraclecloud.com/?tenant=busanbank1
+    * https://console.ap-seoul-1.oraclecloud.com/?tenant=busanbank2019
 
     > 참고) 두 가지 로그인 타입이 있습니다. OCI 전용 계정이 있으며, IDCS라는 계정 관리를 위한 클라우드 서비스와 연동 (Single Sign On)해서 사용하는 계정이 있습니다.
 
@@ -330,7 +330,7 @@
         * Docker Username은 OCI 사용자 아이디입니다. OCI Console 우측 상단의 사람 아이콘을 클릭해서 확인할 수 있습니다. 여기에 Tenancy명이 필요합니다. 아래 Value는 예시이며, 보통 다음과 같이 구성됩니다.
 
         **Key:** DOCKER_USERNAME  
-        **Value:** busanbank1/oracleidentitycloudservice/donghu.kim@oracle.com
+        **Value:** busanbank2019/oracleidentitycloudservice/donghu.kim@oracle.com
 
     4. DOCKER_REPO
         * Docker Repository이름으로 Tenancy명 + {레파지토리명}입니다. 다음과 같이 레파지토리 이름을 지정합니다.
@@ -338,7 +338,7 @@
         **!!! Repository는 Tenancy에서 공통으로 사용하기 때문에 각자 레파지토리 이름이 달라야 하므로, 영문 이니셜을 뒤에 붙입니다.**
 
         **Key:** DOCKER_REPO  
-        **Value:** busanbank1/oracle-devops-workshop-{자신의 영문 이니셜}
+        **Value:** busanbank2019/oracle-devops-workshop-{자신의 영문 이니셜}
 
     5. KUBERNETES_MASTER는 .kube/config 파일에서 얻을 수 있습니다. 해당 파일을 편집기로 열어서 MASTER 서버 주소를 복사해서 입력합니다.
 
@@ -528,7 +528,7 @@
 
   
 ### **STEP 8**: Oracle Container Registry (OCIR) 확인 및 Oracle Kubernetes Engine (OKE) 에 생성(배포)된 Pod와 Service 확인하기
-* OCI에 접속 (https://console.ap-seoul-1.oraclecloud.com?tenant=busanbank1) 후 좌측 **Developer Services** > **Registry (OCIR)** 클릭 합니다.
+* OCI에 접속 (https://console.ap-seoul-1.oraclecloud.com?tenant=busanbank2019) 후 좌측 **Developer Services** > **Registry (OCIR)** 클릭 합니다.
     ![](images/oci-menu-ocir.png)
 
 * OCIR에 이미지가 등록되었습니다. 현재 Helidon(Microprofile)과 Spring Boot 서비스, 프론트엔드 UI 애플리케이션 이미지가 등록된 것을 확인할 수 있습니다.

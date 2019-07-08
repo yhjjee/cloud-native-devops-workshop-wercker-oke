@@ -16,22 +16,57 @@ function(oj, ko, $, endpoints) {
     self.selReleaseDate = ko.observable('');
     self.selOverview = ko.observable('');
 
+    self.people = ko.observable('');
+    var title = "";
+
     // not implemented yet
     function MovieDetail(){
         var url = JSON.parse(endpoints).movies;
         var image = JSON.parse(endpoints).image;
+        
         $.getJSON(url+"/"+self.movieId(), function (data) {
-            $.each(data, function () {
-                console.log(data.title)
+            //$.each(data, function () {
                 self.selTitle(data.title);
                 self.selVoteCount(data.vote_count);
                 self.selVoteAverage(data.vote_average);
                 self.selPosterPath(image + "/" + data.poster_path);
                 self.selReleaseDate(data.release_date);
                 self.selOverview(data.overview);
-            });
+
+                MoviePeople(data.title);
+            //});
+        })
+
+        
+        
+    }
+
+    function MoviePeople(title){
+        console.log("title : " + title);
+        var url = JSON.parse(endpoints).moviepeople;
+        $.getJSON(url+"/filmography/"+title, function (data) {
+            var people = "";
+            if(data.content.length === 1)
+                self.people(data.content[0].name);
+            else {
+                $.each(data.content, function (i, val) {
+                    people += val.name + ","
+                });
+
+                if(people !== "") {
+                    people = people.substring(0, people.length-1);
+                }
+
+                console.log(people);
+                self.people(people);
+            }
         })
     }
+
+    http://localhost:8081/moviepeople/filmography/
+
+
+
     function MovieListViewModel() {
 
         self.connected = function() {
