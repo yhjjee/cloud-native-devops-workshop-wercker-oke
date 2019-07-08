@@ -90,7 +90,7 @@
 
     ![](images/oci-menu-oke.png)
 
-* OKE Cluster를 생성 할 Compartment를 선택합니다.
+* OKE Cluster를 생성 할 Compartment를 선택합니다. (busanbank2019 > devops_workshop)
     > 참고) Compartment는 OCI에서 관리하는 리소스들을 그룹으로 묶어서 관리하기 위해 제공되는 기능입니다. 일반적으로 팀 단위로 리소스(Compute, Network, Storage등)를 관리하기 위한 목적으로 사용됩니다. Compartment 이름은 아래 스크린샷과 다를 수 있습니다.
 
     ![](images/oci-create-oke-cluster-compartment.png)
@@ -99,10 +99,10 @@
 
     ![](images/oci-create-oke-cluster.png)
 
-* 다음과 같이 입력합니다.  Virtual Machine Gen2, 1 OCPU에 생성된 네트워크 서브넷당 한개의 쿠버네티스 노드를 생성합니다.
+* 다음과 같이 입력합니다. Virtual Machine Gen2, 1 OCPU에 생성된 네트워크 서브넷당 한개의 쿠버네티스 노드를 생성합니다.
     > 참고) Compute Shape의 의미는 다음과 같습니다. VM.Standard2.1은 Virtual Machine Gen2, 1 OCPU를 의미합니다.
     
-    * NAME: oke-cluster1
+    * NAME: oke-cluster-{이름 영문 이니셜}-1 (예. oke-cluster-dhk-1)
     * KUBERNETES VERSION: v1.12.7
     * QUICK CREATE: CHECK
     * SHAPE: VM.Standard2.1
