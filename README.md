@@ -9,7 +9,7 @@
 * DevOps 이해
 * Oracle Kubernetes Cluster 환경 구성
 * Wercker 환경 구성, 파이프라인 이해 및 빌드, 실행
-* Kubernetes Container 서비스 배포
+* Kubernetes Container 배포, 운영
 
 ## Required Artifacts
 * 인터넷 접속 가능한 랩탑 (Windows 10이상, Windows 10 이하 버전일 경우 Powershell 필요)
@@ -17,7 +17,6 @@
 * OCI (Oracle Cloud Infrastructure) 계정
 
 ## Hands-On Steps
-총 10단계로 스탭으로 진행합니다.
 
 * **STEP 1**: Setup  
 * **STEP 2**: OCI에서 Kubernetes Cluster 생성하기  
@@ -177,12 +176,12 @@
         ![](images/oci-get-user-ocid.png)
         oci-cli 설치를 위해 필요하기 때문에 User OCID를 복사해서 메모합니다.
         ![](images/oci-get-user-ocid-copy.png)
-    2. Tenancy OCID
+    2. Tenancy OCID  
         Tenancy OCID는 OCI Console 우측 상단의 사용자 아이콘을 클릭한 후 Tenancy를 선택하면 확인할 수 있습니다.
         ![](images/oci-get-tenancy-ocid.png)
         oci-cli 설치를 위해 필요하기 때문에 Tenancy OCID를 복사해서 메모합니다.
         ![](images/oci-get-tenancy-ocid-copy.png)
-    3. Region
+    3. Region  
         여기서는 서울 리전을 사용합니다. (ap-seoul-1)
 
 * 위에서 얻은 정보를 사용해서 oci-cli 설정을 진행합니다. **Windows Powershell(관리자 모드)** 에서 다음과 같이 입력합니다.
@@ -340,14 +339,14 @@
         **Key:** DOCKER_REPO  
         **Value:** busanbank2019/oracle-devops-workshop-{자신의 영문 이니셜}
 
-    5. KUBERNETES_MASTER는 .kube/config 파일에서 얻을 수 있습니다. 해당 파일을 편집기로 열어서 MASTER 서버 주소를 복사해서 입력합니다.
+    5. KUBERNETES_MASTER는 $HOME/.kube/config 파일에서 얻을 수 있습니다. 해당 파일을 편집기로 열거나, **Windows Powershell**에서 **type config**로 출력해서 MASTER 서버 주소를 복사 후 입력합니다.
 
         ![](images/oci-oke-kubeconfig-master-server.png)
   
         **Key:** KUBERNETES_MASTER  
         **Value:**: KUBERNETES SERVER MASTER URL (예. https://c3donjwgqzd.ap-seoul-1.clusters.oci.oraclecloud.com:6443)
 
-    6. KUBERNETES_AUTH_TOKEN도 마찬가지로 .kube/config 파일에서 얻을 수 있습니다. 해당 파일을 편집기로 열어서 AUTH TOKEN을 복사해서 입력합니다.
+    6. KUBERNETES_AUTH_TOKEN도 마찬가지로 .kube/config 파일에서 얻을 수 있습니다. 해당 파일을 편집기로 열거나, **Windows Powershell**에서 **type config**로 출력해서 AUTH TOKEN을 복사해서 입력합니다.
 
         ![](images/oci-oke-kubeconfig-auth-token.png)
 
@@ -357,7 +356,7 @@
 * Wercker Application 환경 설정을 완료한 모습입니다.
     ![](images/wercker-env-completed.png)
 
-### **STEP 6**: Wercker CI/CD Pipeline 구성하기
+### **STEP 6**: Wercker CI/CD 파이프라인 구성하기
 > 참고) 이미 설정이 완료된 파일이므로, 내용만 확인합니다.
 
 * 자신의 Git Repository (cloud-native-devops-workshop-wercker-oke)에 접속하면 처음에 생성 시 가져온 파일 중에서 다음 3개의 설정 파일을 확인할 수 있습니다.
@@ -569,4 +568,9 @@ External IP로 변경한 후 맨 아래 Commit 버튼을 클릭합니다.
         http://132.145.86.1
         ```
     
+    **Movie list**
     ![](images/ojet-ui-1.png)
+
+    **Movie detail with people**
+    ![](images/jet-movie-detail-with-people.png)
+    
