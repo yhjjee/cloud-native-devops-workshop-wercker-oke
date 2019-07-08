@@ -1,5 +1,5 @@
 {
-    "movies": "http://132.145.86.253:30000/api/search/v1/movies",
-    "moviepeople": "http://132.145.85.69:31000/moviepeople",
+    "movies": "http://132.145.87.217:30000/api/search/v1/movies",
+    "moviepeople": "http://132.145.84.117:31000/moviepeople",
     "image": "https://image.tmdb.org/t/p/w185"
 }
