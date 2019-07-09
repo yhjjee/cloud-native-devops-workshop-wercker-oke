@@ -99,13 +99,13 @@
     ![](images/oci-create-oke-cluster.png)
 
 * 다음과 같이 입력합니다. Virtual Machine Gen2, 1 OCPU에 생성된 네트워크 서브넷당 한개의 쿠버네티스 노드를 생성합니다.
-    > 참고) Compute Shape의 의미는 다음과 같습니다. VM.Standard2.1은 Virtual Machine Gen2, 1 OCPU를 의미합니다.
+    > 참고) Compute Shape의 의미는 다음과 같습니다. VM.Standard2.2은 Virtual Machine Gen2, 2 OCPU를 의미합니다.
     
     * NAME: oke-cluster-{이름 영문 이니셜}-1 (예. oke-cluster-dhk-1)
     * KUBERNETES VERSION: v1.12.7
     * QUICK CREATE: CHECK
-    * SHAPE: VM.Standard2.1
-    * QUANTITY PER SUBNET: 2
+    * SHAPE: VM.Standard2.2
+    * QUANTITY PER SUBNET: 1
 
     <img src="images/oci-create-oke-cluster-creation.png" width="50%">
 
